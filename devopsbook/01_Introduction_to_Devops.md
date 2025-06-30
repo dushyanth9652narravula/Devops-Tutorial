@@ -34,3 +34,32 @@ DevOps simply means combination of two words Development and Operations which de
   3. In Agile Methodology, everything is manual process. Most of the steps need man power. Since it requires lot of manual work, so there might be human errors which might delay the delivery process.
 
 - So to overcome the issues in agile methodology, a new methodology or practice introduced which is called Devops. Devops simply means Development + Operations team which is the set of tools that bridges the gap between developers and operations team to improve the software delivery process. Devops automates the so many steps in software development process.
+
+## Continuous Integration
+
+- Continuous integration is an automated process in devops which produce softwares and its features very quickly and efficiently. It is a software development practice which involves frequently merging the code changes into shared repository and automatically building and testing the code.
+
+- The goal of the CI is to improve the software quality by finding and fixing the bugs in the code quickly so that it reduces the time taken to release new updates.
+
+- In Agile, developers first write the code for the software project and push them into centalized repository called Git repository. Then other people will build and test this code and produce a software artifact by packaging the code in the form of zip, archive or MSI etc. Then operations team will deploy this software artifact in production servers. 
+
+- But there might arise some issues in this process. Suppose developers write the code for new features for 3 weeks and push it into git repository. After three weeks the persons who are responsible for building and testing the code will fetch the code from repository and then build and these code. If they found any errors in this building and testing phase then they sent back this code to developers itself. Now it is very hard for developers to fix the errors in entire 3 weeks of code and they would be frustated.
+
+- So to rectify this, we actually need to instantly build and test the code as soon as developer pushes the code into shared repository. If you get any errors while building the code they notify those errors back to developers, so they can fix those bugs easily.
+
+- But the problem here is builing and testing for every push is difficult. So we need to automate this process. Automating the entire building and testing the code and generating software artifcats is called continuous integration. So the entire continuous integration process is the following :
+
+<img src = "./_static/Continuous_Integration.PNG" alt = "Continuous Integration Process">
+
+- Tools used are :
+
+  1. **Coding** : Eclipse, Visual Studio Code, Atom, Pycharm, etc.
+
+  2. **Version Control** : Git, SVN, TFS, Perforce, etc.
+
+  3. **Build Tools** : Maven, Ant, Gradle, MS Build, Visual Build, IBM Urban Code, Make , Grunt etc.
+
+  4. **Software Artificats** : SonaType Nexus, Jfrog Artifactory, Archiva, Cloudsmith Package, Grunt etc.
+
+  5. **Continuous Integration** : Jenkins, Circleci, Teamcity, Bamboo CI, Cruise Control.
+
