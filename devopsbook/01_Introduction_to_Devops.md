@@ -49,7 +49,9 @@ DevOps simply means combination of two words Development and Operations which de
 
 - But the problem here is builing and testing for every push is difficult. So we need to automate this process. Automating the entire building and testing the code and generating software artifcats is called continuous integration. So the entire continuous integration process is the following :
 
-<img src = "./_static/Continuous_Integration.PNG" alt = "Continuous Integration Process" width = 1000 height = 500>
+  <img src = "./_static/Continuous_Integration.PNG" alt = "Continuous Integration Process" width = 1000 height = 500>
+
+
 
 - Tools used are :
 
@@ -63,3 +65,7 @@ DevOps simply means combination of two words Development and Operations which de
 
   5. **Continuous Integration** : Jenkins, Circleci, Teamcity, Bamboo CI, Cruise Control.
 
+
+## Continuous Delivery
+
+- Once we 
