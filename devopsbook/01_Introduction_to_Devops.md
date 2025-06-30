@@ -68,4 +68,42 @@ DevOps simply means combination of two words Development and Operations which de
 
 ## Continuous Delivery
 
-- Once we 
+- Once we build the software artifact from CI process, now we need to deploy that artifact into production servers. Since CI is automated, now ops team gets conitinuous requests for deployment of code from dev team which is an additional burden for the ops team. Sometimes the artifact maynot deploy correctly due to configuration changes.
+
+- Usually deploymnet of artifacts includes :
+
+  1. **Server Provisioning** : Creating the server for deployment.
+
+  2. **Dependencies** : After Server Provisioning, we need to install all the dependencies.
+
+  3. **Configuration Changes** : Then we need to configure the server so that it would similarly looks like dev team environment.
+
+  4. **Network** : Once we configured the server, we need to setup the firewalls and some other network settings.
+
+  5. **Artifact Deploy** : The final step is to deploy the artifact that we have got from the CI process.
+
+  And there might be more steps also. If any on these steps failed then ops team might gets errors and the deployment process gets delayed.
+
+- After code deployment, the next step is Quality and Assurance Testing. In this setp, QA team will test the deployed code to check whether all the features are working correctly or not. If everything works well then they send that deployed code to production level. 
+
+- These are the general steps involved in software development process. 
+
+- In both Code Deployment and QA testing steps there is a lot of manual work is involved. Any unclear instructions from previous step might delay the delivery process. So we need to automate these steps similar to CI Process.
+
+- To automate these steps we have these tools :
+
+  1. **Ansible, Puppet, Cheff** - These tools are for system automation such as server provisioning and configuring the server etc.
+
+  2. **Terraform, Cloud Formation** - These are for cloud automation.
+
+  3. **Jenkins, Octopus Deploy** - These are for CI/CD automation.
+
+  4. **HELM CHARTS**
+
+  5. **Code Deploy**
+
+- So now Ops team writes the automated code for deploymnet and QA team will write automated code for testing the quality of deployed software and then synchronize it with CI process which automates entire Software Development Life Cycle.
+
+- Continuous Delivery is to automate the build, test, configuration and deployment from the build to the production environment. Te main aim of Continuous Delivery is to speed up the deployment process, Reduce costs, Lower the Risks and maintain the software quality.
+
+So Devops is simply automating the entire lifecyle of software development process by improving the coordination between Dev and Ops team by using some set of tools.
