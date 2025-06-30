@@ -3,3 +3,6 @@
 
 format: jb-book
 root: 01_Introduction_to_Devops
+chapters:
+
+  - file: 02_Tools_Setup_For_Devops
