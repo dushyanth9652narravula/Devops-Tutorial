@@ -1,4 +1,5 @@
-# Introduction to Linux
+# Linux
+## Introduction to Linux
 
 - Linux is an Open Source Unix based Operating System build on top of linux kernal and some GNU Utilities. This linux kernal is developed by a finnish student called Linus Tolvards in 1991. Linux operating system is packaged as Linux dstribution which contains Linux Kernal, System Software and some other supporting libraries which are offered by GNU Project. Several Linux distributions uses title called "Linux" but free software foundation uses it as "GNU/Unix". Famous linux distributions in the market are RPM and Debian.
 
