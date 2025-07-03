@@ -9,4 +9,4 @@ chapters:
   - file : 03_Virtualization_and_VM_Setup
   - file: 04_Linux/01_Introduction_to_Linux
     sections:
-      - file: 04_Linux/02_Directory_Structure_and_Basic_Commands_of_linux
+      - file: 04_Linux\02_Directory_Structure_and_Basic_Commands_of_Linux
