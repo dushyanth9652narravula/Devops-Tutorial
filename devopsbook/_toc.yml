@@ -11,3 +11,4 @@ chapters:
     sections:
       - file: 04_Linux/02_Directory_Structure_and_Basic_Commands_of_Linux
       - file: 04_Linux/03_Vim_Editor
+      - file: 04_Linux/04_File_Types
