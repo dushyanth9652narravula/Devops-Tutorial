@@ -14,3 +14,4 @@ chapters:
       - file: 04_Linux/04_File_Types
       - file: 04_Linux/05_Filters_And_Redirections
       - file: 04_Linux/06_Users_And_Groups
+      - file: 04_Linux/07_File_Permissions
