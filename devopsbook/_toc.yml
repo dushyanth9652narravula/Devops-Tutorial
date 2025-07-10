@@ -16,3 +16,5 @@ chapters:
       - file: 04_Linux/06_Users_And_Groups
       - file: 04_Linux/07_File_Permissions
       - file: 04_Linux/08_Sudo
+
+  - file: 05_Git/01_Introduction
