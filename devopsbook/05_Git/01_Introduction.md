@@ -24,12 +24,12 @@
 
 - **Localized Version Control System** : In Localized VCS, we actually have a version control system locally and it uses a certain kind of database to version all our modifications to that program, document or website etc. Here we have a local repository which contains all the versions of our documents or whatever we are versioning. Here is how Localized VCS Works :
 
-<img src = "./_static/Local_VCS.png" alt = "Localized Version Control System" width = 1000 height = 500>
+<img src = "../_static/Local_VCS.png" alt = "Localized Version Control System" width = 1000 height = 500>
 
 
 - **Centralized Version Control System** : In Centralized VCS, we actually have a server which mantians the original copy of our data and each workstation (Our own computer) has a working copy of the fileand we can make changes in that working copy and once we made changes that we have made then we can push the changes to the server. This server maintains all the versions of the file (Code or Document or Website). 
 
-<img src = "./_static/Centralized_VCS.PNG" alt = "Centralized Version Control System" width = 1000 height = 500>
+<img src = "../_static/Centralized_VCS.PNG" alt = "Centralized Version Control System" width = 1000 height = 500>
 
 
 - But there are some drawbacks with the both version controlling system. In Localized VCS , If our local system fails then we donot have backup for the data we are versioning and we lost our Documents, Code or Websites and its history. In Centralized VCS also, if the server stops working or fails then we donot have any backup of the history of modifications we have made till now. But we atleast have the current copy in our system.
@@ -38,7 +38,7 @@
 
 - **Distributed Version Control System** : In distributed VCS, we have both local repository and remote repository. In this kind of version control system we acutally tracks the modifications in our local system and also in remote system. Once we made changes to files in our local system and this VCS maintains tracks of all these changes then we actually push these changes to the remote system which also has a copy of history of modifications we made. So even our local or remote system fails still we have a copy of the current file and history of changes. A best example of Distributed Version Control System is `Git`.
 
-<img src = "./_static/Distributed_VCS.png" alt = "Continuous Integration Process" width = 1000 height = 500>
+<img src = "../_static/Distributed_VCS.png" alt = "Continuous Integration Process" width = 1000 height = 500>
 
 
 ## Git
