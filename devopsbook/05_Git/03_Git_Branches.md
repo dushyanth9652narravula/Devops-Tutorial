@@ -34,5 +34,5 @@
 
   **Syntax** : `git branch -m <branchname>` -> Renames the current branch to new name. `git branch -m <oldname> <newname>` renames a particular branch.
 
-- **Note** : `git branch` gives all the branches present in your repository and also highlights your current branch.
+- **Note** : `git branch` gives all the branches present in your repository and also highlights your current branch. And the command above for deleting the branch delete branch locally only. To delete branch in remote repository also we need to use `git push <repositoryname> --delete <branch name>`. To know branching more use this [link](https://www.toolsqa.com/git/branch-in-git/)
 
