@@ -100,3 +100,5 @@
 
   **Remote Repository** : Changes added
 
+- **Note** : Git commits are just pointers or we can say they are linked lists and each item in a list is a commit and each commit is interconnected by pointers.
+
