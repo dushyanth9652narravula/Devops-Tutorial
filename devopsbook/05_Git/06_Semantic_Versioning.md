@@ -8,19 +8,19 @@
 
 - Tagging is a way to mark specific milestones in our project development which are typically used as release points. Git provides two types of tags. Those are :
 
- 1. **Light Weight Tags** : Light Weight tag is a named pointer to specific commit (simlar to branch) but meant to be static. It stores just commit hash not any metadata such as taggers name, message or data etc. It is basically a bookmark to a commit. to create a lightweight tag we use the following syntax.
+  1. **Light Weight Tags** : Light Weight tag is a named pointer to specific commit (simlar to branch) but meant to be static. It stores just commit hash not any metadata such as taggers name, message or data etc. It is basically a bookmark to a commit. to create a lightweight tag we use the following syntax.
 
      **Syntax** : `git tag <tagname>` 
 
     It creates a tag for last commit we made. To apply tags to particular commit, we use `git tag <tagname> <commit Hash>`.
 
- 2. **Annotated tags** : Annotated tags are stored as full git objects in git database. They contain additional metadata such as taggers name, email, date, and a tagging message etc. To create an annotated tag, we use the following syntax.
+  2. **Annotated tags** : Annotated tags are stored as full git objects in git database. They contain additional metadata such as taggers name, email, date, and a tagging message etc. To create an annotated tag, we use the following syntax.
 
-    **Syntax** : `git tag -a <tag name> -m "<Description about tag>"`
+     **Syntax** : `git tag -a <tag name> -m "<Description about tag>"`
 
     It also creates a tag for last commit we made. To create annotated tags for particular commits we need to include commit hash also.
 
-    **Syntax** : `git tag -a <tag name> -m "<Description about tag>" <Commit Hash>`
+     **Syntax** : `git tag -a <tag name> -m "<Description about tag>" <Commit Hash>`
 
 - To check the tags present in current repository we use `git tag` command. If we want to see what we have done at that particular tag we use `git show <tagname>`.
 
