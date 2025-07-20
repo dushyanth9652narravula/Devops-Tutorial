@@ -33,3 +33,43 @@
   **Ex** : `config.vm.synced_folder "../data" "/scripts"
 
   Here if `scripts` directory is not present in the virtual machine then vagrant automatically creates that scripts directory at the specified path.
+
+## Provisioning in Vagrant
+
+- Provisioning in Vagrant is nothing but process of setting up and configuring the virtual machine automatically after the VM is created. Provisioning can include tasks such as installing softwares, setting up the environment or configuring the services or applications in the Virtual Machine. 
+
+- This provisioning is actually useful when we want to set an environment for testing team. We usually setup the VM other configurations normally but we also need to install respective softwares and setting up them and so on. So if you include all the code in vagrant provisoners then they automatically creates that environment and set it up for us.
+
+- Uses of provisioning are :
+
+  1. It automate the setup of environment
+  2. It maintain the consistency across mutiple VMs
+  3. By using provisioning we can recreate the test environment for depolyment.
+
+- There are different types of provisioning in vagrant. The most common provisioning technique is `Shell Provisioner`. If you go to the end of the Vagrantfile, we have one setting called `config.vm.provision` which is responsible for provsioning.
+
+  **Shell Provisioning** : Shell Provisioning is simply nothing but running whatever shell commands we have provided under this setting are automatically executed in virtual machine shell once the VM actually created not powerd on. There are actually two types of shell provisioning. Those are :
+
+    **Inline** : In inline shell provisioning we actually provide all the commands or shell scripts in vagrant file itself for provisioning. 
+
+    **Ex** : 
+
+    ```ruby
+    config.vm.provision "shell", inline: <<-SHELL
+
+        echo "Running Shell Commands"
+
+        sudo apt-get install -y httpd
+
+    SHELL
+    ```
+
+    This commands only gets executed at the time of VM creation only. If you power off the VM and Power on then these commands won't gets executed. If you want to execute the provision commands even during power on then we have to use an additional option called `--provision` along with `vagrant up` which means we have to execute `vagrant up --provision` command. Otherwise we can execute `vagrant provision` command externally to provision the virtual machine even after the creation of VM.
+
+    **External** : In this type of shell provisioning, we use external script file which contains shell commands instead of writing the shell commands internally in the vagrant file. The syntax for this type of provisioning is :
+
+    **Syntax** : `config.vm.provision "shell", path: <Script_File_Path>`
+
+- **Note** : Similarly we have other type of provisioning such as File Provisioning, Ansible Provisioning, Puppet Provisioning, Docker Provisionin. We need to provide respective names there instead of `"shell"` and provide respective commands instead of shell commands.
+
+- The provsioning occurs automatically when you run `vagrant up`. But VM is not  provisioned everytime when you run `vagrant up`. The VM is only provisioned when VM is created for firstime. But you can manually trigger provisioning on an existing VM by running `vagrant provision`. If you want to re run provisioning while `vagrant up` we can run `vagrant up` command like this `vagrant up --provision`. If you don't want to provision you VM even when you are creating for the firsttime then  you create the Vm by running `vagrant up` like this `vagrant up --no-provision`.
