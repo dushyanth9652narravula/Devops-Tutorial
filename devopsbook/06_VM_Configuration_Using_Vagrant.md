@@ -73,3 +73,21 @@
 - **Note** : Similarly we have other type of provisioning such as File Provisioning, Ansible Provisioning, Puppet Provisioning, Docker Provisionin. We need to provide respective names there instead of `"shell"` and provide respective commands instead of shell commands.
 
 - The provsioning occurs automatically when you run `vagrant up`. But VM is not  provisioned everytime when you run `vagrant up`. The VM is only provisioned when VM is created for firstime. But you can manually trigger provisioning on an existing VM by running `vagrant provision`. If you want to re run provisioning while `vagrant up` we can run `vagrant up` command like this `vagrant up --provision`. If you don't want to provision you VM even when you are creating for the firsttime then  you create the Vm by running `vagrant up` like this `vagrant up --no-provision`.
+
+## Hosting a Website on Virtual Machine Manually
+
+- Before hosting a website om virtual machine, first lets us know what is webserver and what is the importance of the web server.
+
+- **Web Server** : 
+
+  1. A Web Server is a software that listens the HTTP/HTTPS requests from the client (like browser) and responds with appropriate content such as HTML pages, images or data etc.
+
+  2. For example, when you enter `http://192.168.56.22` in your browser, your browser send the HTTP Request to the IP address. Then web server running on that IP listens for the request and responds with the requested resource if it is found else it throws an error if resource is not found.
+
+  3. Without web server, the browsers Http request wouldn't hit the VM as there is no program to interpret that request, so the browser would show error like connection refused or unable to connect.
+
+  4. Some of the common web servers are `Apache`, `Nginx`, and other light-weight servers such as `python3 -m http.server 80` etc.
+
+- To host a website on VM, first we need to install webserver which is httpd on Centos and apache on linux. So to install webserver `httpd` we need to use this command `yum install httpd`
+
+- Once we installed `httpd`, we need to start the service using `systemctl start httpd` command. Once the service is started then we actually need to enable the service using `systemctl enable httpd`. Now we need to deploy the website content on the Virtual Machine. Generally Linux distros store all websites content in `/var/www/html` directory. Here we need to place the `index.html` and other related content of the website (But webserver generally opens that file only when we access the ip address). Once we placed all the content of the website in `/var/www/html`, just restart the service by runing `systemctl restart httpd` or `systemctl reload httpd`.
