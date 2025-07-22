@@ -91,3 +91,37 @@
 - To host a website on VM, first we need to install webserver which is httpd on Centos and apache on linux. So to install webserver `httpd` we need to use this command `yum install httpd`
 
 - Once we installed `httpd`, we need to start the service using `systemctl start httpd` command. Once the service is started then we actually need to enable the service using `systemctl enable httpd`. Now we need to deploy the website content on the Virtual Machine. Generally Linux distros store all websites content in `/var/www/html` directory. Here we need to place the `index.html` and other related content of the website (But webserver generally opens that file only when we access the ip address). Once we placed all the content of the website in `/var/www/html`, just restart the service by runing `systemctl restart httpd` or `systemctl reload httpd`.
+
+## WordPress Setup in Ubuntu
+
+- To setup the Wordpress just follow the guidelines provided in the wordpress setup website in google. The only difference I have observed is for hosting a website we used `/var/www/html` directory. But for hosting a complete service, we have used a `/srv/www/` directory. Because `/srv/www` is convinient for hosting multiple services where as in `/var/www/html` is not convinient for hosting multiple websites or services.
+
+## Automating Website Setup and Wordpress Setup Using Vagrant Provisioning
+
+- Till now, we have hosted a website and wordpress in the VM Manually. Now lets automate it by vagrant provisioning. We can simply automate the steps of website setup by just writing the commands that we have run for setting up website under vagrant provisioning part in vagrantfile of that VM.
+
+- So the inline shell commands for website setup are :
+
+  `yum install httpd wget unzip -y`
+
+  `systemctl start httpd`
+
+  `systemctl enable httpd`
+
+  `mkdir -p /tmp/finance`
+
+  `cd /tmp/finance`
+
+  `wget https://www.tooplate.com/zip-templates/2135_mini_finance.zip`
+
+  `unzip -o 2135_mini_finance.zip` -> -o for overriding the files.
+
+  `cp -r 2135_mini_finanace/* /var/www/html`
+
+  `cd /tmp`
+
+  `rm -r finance`
+
+  `systemctl reload httpd`
+
+- Similar to automation of website setup, we can automate the Wordpress setup by just keeping all the commands in Vagrantfile under `config.vm.provision`.
