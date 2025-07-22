@@ -161,3 +161,62 @@
 
 end ```
 If you see the above vagrantfile, we have created 3 VMs which are web01, web02, db01. If you run `vagrant up`, then all the Vms gets created and up. If you want to create only one VM suppose `web01` then we just run `vagrant up web01`. If you want to login to `web01` then you have run `vagrant ssh web01`. So just need to mention the name of the virtual machine which hostname we have provided.
+
+## Systemctl Configuration
+
+- Generally, when you install a service using `yum` or `dnf` or `apt-get` then package manager in that linux os creates a `.service` file in `/usr/lib/systemd/system`. If a service has `.service` file in that specified location then we can start, stop or enable those services by using `systemctl` command.
+
+- But there are some services which cannot be installed by the package manager. In those case we have to manually download and run those services. One of such service is apache tomcat. **Apache Tomcat** is a service which is generally used to host java based websites. This service can be installed by the package managers in linux. We have to manually setup these service.
+
+- To setup the tomcat service and enable systemctl command , we have to follow these steps.
+
+  1. First we need to download the core distribution file of the service either in zip or tar format. We can do this using `wget` command.
+
+    **Syntax** : `wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.43/bin/apache-tomcat-10.1.43.tar.gz`
+
+  2. Next we need to extract the files from that tar or zip file.
+
+    **Syntax** : `tar xzvf apache-tomcat-10.1.43.tar.gz`
+
+  3. Generally when we install a service in linux, then package manager actually creates an user and group with same name so that these service files can be accessed by that service user only. So we have to create an user with same name as service but it doesn't have shell login. Because the Service Users maynot require interactive shell.
+
+    **Syntax** : `useradd --home-dir /opt/tomcat --shell /sbin/nologin tomcat`
+
+  4. Now we need to change the ownership of all the files of the services to the service user (generally package manager doesn't change the ownership of all the service files to service user from root. It only changes the ownership for required files. ) To change the ownership we use the `chown` command.
+
+    **Syntax** : `chown -R tomcat:tomcat /opt/tomcat/`
+
+  5. Finally we need to create a `.service` file for this service under `/etc/systemd/system` directory. Here we are enabling systemctl for tomcat, so we create a `tomcat.service` file in `/etc/systemd/system`. In that file we need to give the following content 
+
+   ```ini
+   [Unit]
+   Description=Tomcat
+   After=network.target
+
+
+  [Service]
+  Type=forking
+
+  User=tomcat
+  Group=tomcat
+
+  WorkingDirectory=/opt/tomcat
+
+  Environment=JAVA_HOME=/usr/lib/jvm/jre
+
+  Environment=CATALINA_HOME=/opt/tomcat
+  Environment=CATALINE_BASE=/opt/tomcat
+
+  ExecStart=/opt/tomcat/bin/startup.sh
+  ExecStop=/opt/tomcat/bin/shutdown.sh
+
+  [Install]
+  WantedBy=multi-user.target
+
+  ```
+
+  6. Once we have create the `.service` file then we need to run the `systemctl daemon-reload` to reload all the services in the system and then we start and enable the service by using `systemctl start <service name>` and `systemctl enable <service name>`.
+
+- So we need to follow all these steps to enable `systemctl` command for a service which we cannot install by packagemanager.
+
+
