@@ -24,3 +24,5 @@ chapters:
       - file: 05_Git/04_Git_Rollback
       - file: 05_Git/05_Git_SSH_Login_and_Rebase
       - file: 05_Git/06_Semantic_Versioning
+  
+  - file: 06_VM_Configuration_Using_Vagrant
