@@ -172,19 +172,19 @@ If you see the above vagrantfile, we have created 3 VMs which are web01, web02, 
 
   1. First we need to download the core distribution file of the service either in zip or tar format. We can do this using `wget` command.
 
-    **Syntax** : `wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.43/bin/apache-tomcat-10.1.43.tar.gz`
+     **Syntax** : `wget https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.43/bin/apache-tomcat-10.1.43.tar.gz`
 
   2. Next we need to extract the files from that tar or zip file.
 
-    **Syntax** : `tar xzvf apache-tomcat-10.1.43.tar.gz`
+     **Syntax** : `tar xzvf apache-tomcat-10.1.43.tar.gz`
 
   3. Generally when we install a service in linux, then package manager actually creates an user and group with same name so that these service files can be accessed by that service user only. So we have to create an user with same name as service but it doesn't have shell login. Because the Service Users maynot require interactive shell.
 
-    **Syntax** : `useradd --home-dir /opt/tomcat --shell /sbin/nologin tomcat`
+     **Syntax** : `useradd --home-dir /opt/tomcat --shell /sbin/nologin tomcat`
 
   4. Now we need to change the ownership of all the files of the services to the service user (generally package manager doesn't change the ownership of all the service files to service user from root. It only changes the ownership for required files. ) To change the ownership we use the `chown` command.
 
-    **Syntax** : `chown -R tomcat:tomcat /opt/tomcat/`
+     **Syntax** : `chown -R tomcat:tomcat /opt/tomcat/`
 
   5. Finally we need to create a `.service` file for this service under `/etc/systemd/system` directory. Here we are enabling systemctl for tomcat, so we create a `tomcat.service` file in `/etc/systemd/system`. In that file we need to give the following content 
 
