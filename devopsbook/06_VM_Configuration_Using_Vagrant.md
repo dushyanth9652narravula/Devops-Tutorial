@@ -125,3 +125,39 @@
   `systemctl reload httpd`
 
 - Similar to automation of website setup, we can automate the Wordpress setup by just keeping all the commands in Vagrantfile under `config.vm.provision`.
+
+## MultiVM Vagrantfile
+
+- Till now we have seen creating and provisioning single virtual machine using single Vagrantfile. But we can create mutiple vm by using single vagrant file. To do this we have to use a syntax called `config.vm.define "vm_name" do |<class_object (Mostly same as VM Name)>|`. By using this syntax, we can write the configuration of each vm seperately. For example we have settings of VM provider, VM Box, VM Network etc. 
+
+  **Ex** : 
+
+  ```ruby
+  Vagrant.configure("2") do |config|
+
+    config.vm.define "web01" do |web01|
+
+        web01.vm.box = "ubuntu/focal64"
+        web01.vm.hostname = "web01"
+        web01.vm.network "private_network" , ip: "192.168.56.22"
+
+    end
+
+    config.vm.define "web02" do |web02|
+
+        web02.vm.box = "ubuntu/focal64"
+        web02.vm.hostname = "web02"
+        web02.vm.network "private_network", ip: "192.168.56.23"
+
+    end
+
+    config.vm.define "db01" do |db01|
+
+        db01.vm.box = "eurolinux-vagrant/centos-stream-9"
+        db01.vm.hostname = "db01"
+        db01.vm.network "private_network", ip: "192.168.56.24"
+
+    end
+
+end ```
+If you see the above vagrantfile, we have created 3 VMs which are web01, web02, db01. If you run `vagrant up`, then all the Vms gets created and up. If you want to create only one VM suppose `web01` then we just run `vagrant up web01`. If you want to login to `web01` then you have run `vagrant ssh web01`. So just need to mention the name of the virtual machine which hostname we have provided.
