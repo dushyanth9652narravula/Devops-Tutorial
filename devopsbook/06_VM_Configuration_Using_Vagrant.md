@@ -188,32 +188,32 @@ If you see the above vagrantfile, we have created 3 VMs which are web01, web02, 
 
   5. Finally we need to create a `.service` file for this service under `/etc/systemd/system` directory. Here we are enabling systemctl for tomcat, so we create a `tomcat.service` file in `/etc/systemd/system`. In that file we need to give the following content 
 
-   ```ini
-   [Unit]
-   Description=Tomcat
-   After=network.target
+      ```ini
+      [Unit]
+      Description=Tomcat
+      After=network.target
 
 
-  [Service]
-  Type=forking
+      [Service]
+      Type=forking
 
-  User=tomcat
-  Group=tomcat
+      User=tomcat
+      Group=tomcat
 
-  WorkingDirectory=/opt/tomcat
+      WorkingDirectory=/opt/tomcat
 
-  Environment=JAVA_HOME=/usr/lib/jvm/jre
+      Environment=JAVA_HOME=/usr/lib/jvm/jre
 
-  Environment=CATALINA_HOME=/opt/tomcat
-  Environment=CATALINE_BASE=/opt/tomcat
+      Environment=CATALINA_HOME=/opt/tomcat
+      Environment=CATALINE_BASE=/opt/tomcat
 
-  ExecStart=/opt/tomcat/bin/startup.sh
-  ExecStop=/opt/tomcat/bin/shutdown.sh
+      ExecStart=/opt/tomcat/bin/startup.sh
+      ExecStop=/opt/tomcat/bin/shutdown.sh
 
-  [Install]
-  WantedBy=multi-user.target
+      [Install]
+      WantedBy=multi-user.target
 
-  ```
+      ```
 
   6. Once we have create the `.service` file then we need to run the `systemctl daemon-reload` to reload all the services in the system and then we start and enable the service by using `systemctl start <service name>` and `systemctl enable <service name>`.
 
