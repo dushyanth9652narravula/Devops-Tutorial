@@ -47,7 +47,7 @@
 
   **ls** : It actually displays the list of files and directories present in current directory. The basic syntax is just `ls`. But `ls` has other options also.
 
-  **cat** : It is used to content present in a file. The basic syntax is `cat <filename>` or `cat <absolute path of filename>`
+  **cat** : It is used to content present in a file. The basic syntax is `cat <filename>` or `cat <absolute path of filename>`.`cat` stands for concatenate. It is a command-line utility in Unix/Linux used to: Read, concatenate, and write file contents to standard output (your terminal).
 
   **cd** : It is used to change the directory. The basic syntax is `cd <path>`. Path can be absolute or realtive.
 
