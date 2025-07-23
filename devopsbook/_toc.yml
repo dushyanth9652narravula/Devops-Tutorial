@@ -26,3 +26,4 @@ chapters:
       - file: 05_Git/06_Semantic_Versioning
   
   - file: 06_VM_Configuration_Using_Vagrant
+  - file: 07_Variables_Json_and_YAML
