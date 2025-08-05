@@ -30,3 +30,4 @@ chapters:
   - file: Projects/01_Introduction
     sections:
       - file: Projects/02_Vprofile_Project
+  - file: 08_Networking
