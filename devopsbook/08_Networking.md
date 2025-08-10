@@ -82,3 +82,46 @@
 - There are actually 3 types in Private IP Ranges. First one is `Class A`. Class A addresses are ranges from `10.0.0.0` to `10.255.255.255`. Second one is `Class B`. Class B addresses ranges from `172.16.0.0` to `172.31.255.255`. Third one is `Class C`. `Class C` addresses ranges from `192.168.0.0` to `192.168.255.255`.
 
 - IP addresses are hirerarchical. Because of this they are used it for routing. Suppose consider this IP `192.168.10.5`. Here the first part (`192.168.10`) represents the network and last part (`.5`) represents the host (i mean device in the network). So if you see the first part of IP address then we can which network it is after then we can decide to whom we need to reach in that network. Whereas MAC addresses are not hierarical. They are designed for uniqueness of the device. The MAC address actually looks like `00:1A:2B:3C:4D:5E`. The first 3 bytes (`00:1A:2B`) is to identify the manufacturer (organizationally unique identifier). The last 3 bytes are assigned by manufacturer. If you consider the an example of mailing a letter, the postal address (IP address) has country, city, zip code which we can consider IP and that helps us to route across the globe and the persons name (MAC address) just tells us the final delivery person to whom we need to hand it once we reached the delivery person.
+
+
+## Protocols 
+
+- A Protocol is basically a set of rules that devices follow to communicate with each other over a network. We can think it as a language through which two computers can talk each other.
+
+- There are actually different types of Protocols. But mainly we have two types. Those are **Application Layer Protocols** and **Transport Layer Protocols**.
+
+- **Application Layer Protocols** are used for different services such as `HTTP` (HyperText Transfer Protocol), `HTTPS` (HyperText Tansfer Protocol with encryption) are used for web browsing, `FTP` (File Transfer Protocol) is used for file tansfers, `SMTP` (Simple Mail Transfer Protocol) is used for sending mails, `DNS` (Domain Name System) is used to convert the names like google.com into IP addresses.
+
+- **Transport Layer Protocols** are used for establishing the connection between the source and destination and transfers the data packets over the network. There are mainly two transport layer protocols. Those are `TCP` (Transmission Control Protocol) and `UDP` (User Datagram Protocol).
+
+  **TCP** : TCP is a polite and careful delivery service which means it won't stop until your message gets delivered correctly and in right order. TCP is connection oriented which means a handshake happens before data tranfer (like "Hello can we talk ?"). It is relaible also which means if data is lost in the middle, it resent it. TCP make sure the data arrives in the sam order it was sent. TCP is know for its error checking. It detects all the errors and fix them while retransmitting. It is slower than UDP. TCP is mainly used for Web Browsing (HTTP, HTTPS), Email (SMTP, IMAP, POP3), File Transfers (FTP), Remote Login (SSH). 
+
+  **UDP** : UDP is fast and casual delivery service which means it just sends the packets without checking whether they are arrived or not. UDP is connectionless which means No handshake, just fires off the packets. It is unreliable which means no gaurantee whether packets will arrive or not. IN UDP ordering doesn't matter, packets might arrive in different order. It is faster because it skips reliability checks. UDP is mainly used for Streaming video and audio, Online Gaming, Voice Calls, DNS Lookups.
+
+  **Note** : TCP generally uses a three way handshake which means client first asks server that `I want to talk with you` (Synchronize - SYN) then server responds back with a message `Sure, I will hear you. Lets Talk` (Synchronize and Acknowledgement - SYN & ACK) and then client responds `Lets talk` (Acknowledement - ACK). In these process, we might get 2 errors. Those are `This site cannot be reached`, `connection refused`. When TCP tries to talk to the server at start in three way handshake, but server doesn't reply , but TCP tries many times but server won't reply back. Then we can see that `Site cannot be reached` error which means there is not server at that IP. Second one is when TCP tries to talk to server but server responds with TCP RST which is reset, then we can see an error `Connection Refused`. In this scenario, Server is there at that IP but the service we are requesting may not be running on that port or port is not open.
+
+- Usually people gets confused about session layer and transport layer that session layer is responsible for establishment of connection but here TCP is establishing the connection. Pactically connection is established in transport layer and session layer is responsible for mainintaing the converstion between them from start of the connection to its end.
+
+
+## Ports
+
+- A port is virtual point where network connections start and end. It is actually like a door number on a computer that lets the right service or application gets the data. 
+
+- For example your computer has an IP address. But it can run many services at once such as web server, an email server, a file server etc. Each service listens on specific port number. Generally we can say protocol defines how to talk, but port defines where to send the data.
+
+- In a computer we have 3 different types of ports. Those are :
+
+  **Well Known Ports**  : Well Known Ports ranges from 0 to 1023 which are generally used for some standard services like HTTP (80), HTTPS (443), SSH (22). Many will be empty if you aren't running any services.
+
+  **Registered Ports** : Registerd Ports ranges from 1024 to 49151 which are generally used for applications such as MySQL (3306), RDP (3389). Whenever you are installed the applications, these applications runs on registered ports itself.
+
+  **Dynamic/Ephemeral Ports** : It ranges from 49152 to 65535. It is used temporarily by OS when you connect with other systems
+
+- Generally, when a port is open only if some program/service is actively listening on it. A port is “closed” or empty if no application is using it.
+
+- Standard Ports that we need to remember are :
+
+  <img src = "./_static/Ports.png" alt = "Standard Ports" width = 1000 height = 500>
+
+
+  
