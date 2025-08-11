@@ -159,8 +159,8 @@
 
     end
 
-end ```
-If you see the above vagrantfile, we have created 3 VMs which are web01, web02, db01. If you run `vagrant up`, then all the Vms gets created and up. If you want to create only one VM suppose `web01` then we just run `vagrant up web01`. If you want to login to `web01` then you have run `vagrant ssh web01`. So just need to mention the name of the virtual machine which hostname we have provided.
+  end ```
+- If you see the above vagrantfile, we have created 3 VMs which are web01, web02, db01. If you run `vagrant up`, then all the Vms gets created and up. If you want to create only one VM suppose `web01` then we just run `vagrant up web01`. If you want to login to `web01` then you have run `vagrant ssh web01`. So just need to mention the name of the virtual machine which hostname we have provided.
 
 ## Systemctl Configuration
 
