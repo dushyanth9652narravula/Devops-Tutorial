@@ -124,4 +124,70 @@
   <img src = "./_static/Ports.png" alt = "Standard Ports" width = 1000 height = 500>
 
 
+## Networking in Virtual Machines
+
+- In virtual machines, we mostly have 3 types of networks when we create them using the vagrant file. Suppose lets consider, we have created a two VMs (web01 - running apache2 web server,db01 - running mariadb server) by using the multivm vagrantfile. The networks we can establish by using vagrant are : 
+
+  **NAT Mode** : NAT mode is a default network created by virtualbox when we have created the virtual machine which is used to connect to internet. In NAT mode VM gets a private IP like `10.0.2.15` and a default gateway like `10.0.2.2` which is virtualbox internal NAT Router. When the VM sends a request to internet, virtualbox acts as mini-router which translates the VM's private IP to your hosts real IP and forwards the request. Replies comes back to your host and virtualbox routes them back to VM. So from internet perspective, its looks like traffic is coming from host machine not from the VM. Things we can perform in NAT mode are : Access the internet from the VM — browse websites, apt update, yum install, wget files, etc, Download updates & packages inside the VM, VM-to-host communication via port forwarding (manual setup), Outbound connections to other networks.
+
+  **Host Only** :  In Host Only Mode, our VM gets a private IP address (like `192.168.56.22`) and the network is isolated to host and VM only. We cannot access the internet in host only mode. In Host only Mode, virtual box creates a  virtual network adapter on our host machine (like espn01), and each VM thats connected to this network gets an IP in same subnet as the virtual adapter. So if you create anothor VM with IP starts like this `192.168.56._` then this VM also comes in the same network and both VM also can communicate each other since they are in same subnet and host can reach all VM eventhough they are not in same subnet.
+
+  **Bridged Adapter** : In bridged mode, VM acts like its own device on the LAN. In this mode, virtualbox actually creates a virtual network interface card (NIC) in our VM and bridges it with our host's physical NIC. Our router (or switch) gives our VM its own IP address and sees its MAC address directly, just like it would given for our phone or anothor laptop. Our PC's operating system is not involved in routing the traffic for our VM (the virtualbox bridge driver handles the link between physical NIC and VM NIC). So in bridged mode, VM is a full-fledged member of the LAN. directly reachable, no middleman needed.
+
+
+## Networking Commands
+
+- **ifconfig** : It actually shows or configures the network interfaces. It shows IP addresses, subnet masks, MAC and interface status.
+
+  **Syntax** : `ifconfig`
+
+- **ip addr show** : Its a modren version of `ifconfig` which shows the detailed informtion of network interfaces and IP addresses.
+
+  **Syntax** : `ip addr show`
+
+- **ping** : It is actually used to test connectivity or reachability of the host on the network and measure the round trip time. We can check latency in between the hops by using `ping` command. We can use `ping` to check whether two Vms are connected or not. `ping` actually sends ICMP echo requests and reports responses.
+
+  **Syntax** : `ping <url>`
+
+  **Ex** : `ping www.google.com`
+
+- **nmap** : `nmap` is is used to scan the networks to discover hsots,open ports and services running on the ports. It actually scans the target machine network and display all open ports, services running on the ports etc.
+
+  **Syntax** : `nmap <target_ip or hostname>`
+
+- **tracert or traceroute** : It actually used to route the path of data packets to reach the destination by listing all intermediate hops. For windows we use `tracert` and for linux/macos we use `traceroute`
+
+  **Syntax** : `tracert <target_ip or hostname>`
+
+- **mtr** : It actually combines both `ping` and `traceroute` functionality to continuously moniter the route and quality of network path. It provides the live statistics at each hop.
+
+  **Syntax** : `mtr <target_ip or hostname>`
+
+- **telnet** : It is used to connect remote TCP servers for testing or terminal access. It is usefule for testing if port isopen and services respond.
+
+  **Syntax** : `telnet <target_ip or hostname> port`
+
+- **netstat -antp** : It shows active TCP connections and listening ports with associated programs.
+
+  **Syntax** `netstat -antp`
+
+  Here `-a` means all sockets, `-n` means numeric addresses, `-t` means tcp connections, `-p` means program ids/program names.
+
+- **dig** : It is used to check whether a particular host has respective IP in DNS lookup. It is DNS Lookup utility to query DNS servers for domain info.
+
+  **Syntax** : `dig hostname`
+
+- **nslookup** : It is another DNS query tool for interactive or batch DNS lookups.
+
+  **Syntax** : `nslookup hostname`
+
+- **route & route -n** : It is to display or manipulate the IP routing table. `-n` shows numeric IP addresses instead of resloving hostnames.
+
+  **Syntax** : `route` or `route -n`
+
+- **arp** : It is used to view and manipulate the Address Resolution Protocol (ARP) cache — maps IP addresses to MAC addresses on local network.
+
+  **Syntax** : `arp -a`
+
+
   
