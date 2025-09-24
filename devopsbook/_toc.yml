@@ -27,7 +27,8 @@ chapters:
   
   - file: 06_VM_Configuration_Using_Vagrant
   - file: 07_Variables_Json_and_YAML
+  - file: 08_Networking
+  - file: 09_Introduction_to_Containerization
   - file: Projects/01_Introduction
     sections:
       - file: Projects/02_Vprofile_Project
-  - file: 08_Networking
