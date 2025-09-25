@@ -72,5 +72,13 @@
 
   7. **Docker Build** : `docker build -t <image_name> <Dockerfile_path>` is used to build the custom image created by us. `-t` is used to name the image.
 
+## Monolithic vs Microservice Architectures
+
+- Microservices are an architectual and organizational approach to software development where software is composed of small independent services which communicate pver well-defined APIs. These services are owned by small, self contained teams.
+
+- With monolithic architectures, all processes are tightly coupled and run as a single service. This means if one process of an application experiences a spike in demand, the entire architecture must be scaled. Adding or improving a monolithic applications features becomes more complex as code base grows. This complexity limits experimentation and makes it difficult to implement new ideas. Monolithic architectures add risk for application availabilty because many dependent and tightly coupled processes increase the impact of a single process failure.
+
+- With a microservice architecture, an application is built as independent components that run each application process as a service. These services communicate via well-defined interface using small weight APIs. Services are built for business capabilities and each service performs a single function. Because they are independently run, each serive can be updated, deployed and scaled to meet demand on specific functions of an application.
+
   
 
