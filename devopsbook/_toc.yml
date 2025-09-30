@@ -29,6 +29,8 @@ chapters:
   - file: 07_Variables_Json_and_YAML
   - file: 08_Networking
   - file: 09_Introduction_to_Containerization
+  - file: BashScripting/01_Introduction_to_BashScripting
   - file: Projects/01_Introduction
     sections:
       - file: Projects/02_Vprofile_Project
+
