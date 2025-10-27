@@ -30,6 +30,9 @@ chapters:
   - file: 08_Networking
   - file: 09_Introduction_to_Containerization
   - file: 10_BashScripting/01_Introduction_to_BashScripting
+    sections:
+      - file: 10_BashScripting/02_Variables
+      - file: 10_BashScripting/03_Decision_Making_and_Loops
   - file: Projects/01_Introduction
     sections:
       - file: Projects/02_Vprofile_Project
