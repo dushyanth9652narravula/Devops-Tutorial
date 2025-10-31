@@ -33,6 +33,7 @@ chapters:
     sections:
       - file: 10_BashScripting/02_Variables
       - file: 10_BashScripting/03_Decision_Making_and_Loops
+  - file: 11_AWS/01_Introduction_to_CloudComputing_and_AWS
   - file: Projects/01_Introduction
     sections:
       - file: Projects/02_Vprofile_Project
