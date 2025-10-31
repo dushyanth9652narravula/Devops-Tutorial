@@ -1,0 +1,599 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Git &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '05_Git/01_Introduction';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Versioning in Git" href="02_Versioning_in_Git.html" />
+    <link rel="prev" title="Sudo Command in Linux" href="../04_Linux/08_Sudo.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../01_Introduction_to_Devops.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../01_Introduction_to_Devops.html">
+                    Introduction to DevOps
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_Tools_Setup_For_Devops.html">Tools Setup For Devops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Virtualization_and_VM_Setup.html">Virtualization and VM Setup</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../04_Linux/01_Introduction_to_Linux.html">Linux</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../04_Linux/02_Directory_Structure_and_Basic_Commands_of_Linux.html">Directory Structure and Basic Commands of Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04_Linux/03_Vim_Editor.html">Vim Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04_Linux/04_File_Types.html">File Types in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04_Linux/05_Filters_And_Redirections.html">Filter Commands and Redirections in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04_Linux/06_Users_And_Groups.html">Users and Groups in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04_Linux/07_File_Permissions.html">File Permissions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../04_Linux/08_Sudo.html">Sudo Command in Linux</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Git</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_Versioning_in_Git.html">Versioning in Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Git_Branches.html">Git Branching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Git_Rollback.html">Rolling Back to Previous Changes and Commits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Git_SSH_Login_and_Rebase.html">Git SSH Login and Rebase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_Semantic_Versioning.html">Semantic Versioning in Git</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_VM_Configuration_Using_Vagrant.html">Server Configuration Using Vagrant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Variables_Json_and_YAML.html">Variables, Json and YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_Networking.html">Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_Introduction_to_Containerization.html">Introduction to Containerization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_BashScripting/01_Introduction_to_BashScripting.html">Introduction to Bash Scripting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10_BashScripting/02_Variables.html">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_BashScripting/03_Decision_Making_and_Loops.html">Decision Making and Loops</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11_AWS/01_Introduction_to_CloudComputing_and_AWS.html">Introduction to Cloud Computing and AWS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11_AWS/02_AWS_Global_Infrastructure.html">AWS Global Infrastructure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Projects/01_Introduction.html">Projects</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Projects/02_Vprofile_Project.html">Vprofile Project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F05_Git/01_Introduction.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/05_Git/01_Introduction.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Git</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-version-control-system">Introduction to Version Control System</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-version-control-system">Types of Version Control System</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Git</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="git">
+<h1>Git<a class="headerlink" href="#git" title="Link to this heading">#</a></h1>
+<section id="introduction-to-version-control-system">
+<h2>Introduction to Version Control System<a class="headerlink" href="#introduction-to-version-control-system" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Suppose you are working in a team where you all together developing an application and some of the members in the team are working on same code. At a moment you made some changes to the code and save it. And when your teammate opened the same code file and starts executing the code and he faced so many issues with this new code. Now your teammate wants to go back to previous code which is working better. But he doesn’t know what changes you have made in that code.</p></li>
+<li><p>Now your teammate ask you to remove all the changes you made to that code file to get back the previous code file. Suppose you have made a lot of changes to that code and you forgot the some of the changes you made. Now its become difficult for you to get back the previous code by removing the changes. In these case people generally version the code written by all developers (in this case teammates.)</p></li>
+<li><p>In Versioning, what we actually do is there is an original file at start. Here we have wriiten some code for some features of the application and we save it in the same file. Now we actually create one more file with same name but ending with the timestamp (it is date and time at which we made changes to that file.) which is treated as backup. Now you teammate has changes the original file by adding some more features and save it in the same file. Now he will create one more file with same name but appending the timestamp at end. If you want to go back to the previous code, yo just need to copy the code form the backup file to original file so that you get back into the previous changes. This is the basic idea of the versioning.</p></li>
+<li><p>The main drawback in this versioning is we might end up creating a lot of backup files in our system as we made changes to the application continuously. So it would be tedious for to go back to previous changes quickly, as we need to find the file first to where we want to rollback and then we have to copy the content from that file to original file to get the previous code.</p></li>
+<li><p>To overcome these drawbacks, we have so many version control systems available in market which uses different methods for versioning the data. One of the most popular one is <code class="docutils literal notranslate"><span class="pre">Git</span></code>.</p></li>
+<li><p>These version control systems manage the multiple versions of Documents, programs and websites etc. They actually keep track history of collection of files. This version control software keeps track of every modification in a special kind of database.</p></li>
+</ul>
+</section>
+<section id="types-of-version-control-system">
+<h2>Types of Version Control System<a class="headerlink" href="#types-of-version-control-system" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>There are actually three types of version control systems. Those are :</p>
+<ol class="arabic simple">
+<li><p>Localized Version Control System</p></li>
+<li><p>Centralized Version Control System</p></li>
+<li><p>Distributed Version Control System</p></li>
+</ol>
+</li>
+<li><p><strong>Localized Version Control System</strong> : In Localized VCS, we actually have a version control system locally and it uses a certain kind of database to version all our modifications to that program, document or website etc. Here we have a local repository which contains all the versions of our documents or whatever we are versioning. Here is how Localized VCS Works :</p></li>
+</ul>
+<img src = "../_static/Local_VCS.png" alt = "Localized Version Control System" width = 1000 height = 500>
+<ul class="simple">
+<li><p><strong>Centralized Version Control System</strong> : In Centralized VCS, we actually have a server which mantians the original copy of our data and each workstation (Our own computer) has a working copy of the fileand we can make changes in that working copy and once we made changes that we have made then we can push the changes to the server. This server maintains all the versions of the file (Code or Document or Website).</p></li>
+</ul>
+<img src = "../_static/Centralized_VCS.PNG" alt = "Centralized Version Control System" width = 1000 height = 500>
+<ul class="simple">
+<li><p>But there are some drawbacks with the both version controlling system. In Localized VCS , If our local system fails then we donot have backup for the data we are versioning and we lost our Documents, Code or Websites and its history. In Centralized VCS also, if the server stops working or fails then we donot have any backup of the history of modifications we have made till now. But we atleast have the current copy in our system.</p></li>
+<li><p>To overcome these issues we have distributed version control system.</p></li>
+<li><p><strong>Distributed Version Control System</strong> : In distributed VCS, we have both local repository and remote repository. In this kind of version control system we acutally tracks the modifications in our local system and also in remote system. Once we made changes to files in our local system and this VCS maintains tracks of all these changes then we actually push these changes to the remote system which also has a copy of history of modifications we made. So even our local or remote system fails still we have a copy of the current file and history of changes. A best example of Distributed Version Control System is <code class="docutils literal notranslate"><span class="pre">Git</span></code>.</p></li>
+</ul>
+<img src = "../_static/Distributed_VCS.png" alt = "Continuous Integration Process" width = 1000 height = 500>
+</section>
+<section id="id1">
+<h2>Git<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Git is a distributed version control system. It is created by linus tolvards who has created the linux kernal.</p></li>
+<li><p>Git supports for non - linear development and it is fully distributed and can able to handle large projects. It is simple to use and provides simple commands to version our data. It also provides many cloud based remote repositories such as Github, Bigbucket, codecommit by aws etc.</p></li>
+<li><p>Since it is supported by many cloud based remote repositories, so we can make a copy of local repositories in many ways as backup and these backups can be useful in case of system failures.</p></li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./05_Git"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../04_Linux/08_Sudo.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Sudo Command in Linux</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_Versioning_in_Git.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Versioning in Git</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-version-control-system">Introduction to Version Control System</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#types-of-version-control-system">Types of Version Control System</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Git</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

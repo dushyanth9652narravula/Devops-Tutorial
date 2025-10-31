@@ -1,0 +1,699 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Linux &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '04_Linux/01_Introduction_to_Linux';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Directory Structure and Basic Commands of Linux" href="02_Directory_Structure_and_Basic_Commands_of_Linux.html" />
+    <link rel="prev" title="Virtualization and VM Setup" href="../03_Virtualization_and_VM_Setup.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../01_Introduction_to_Devops.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../01_Introduction_to_Devops.html">
+                    Introduction to DevOps
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_Tools_Setup_For_Devops.html">Tools Setup For Devops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Virtualization_and_VM_Setup.html">Virtualization and VM Setup</a></li>
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Linux</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="02_Directory_Structure_and_Basic_Commands_of_Linux.html">Directory Structure and Basic Commands of Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Vim_Editor.html">Vim Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_File_Types.html">File Types in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Filters_And_Redirections.html">Filter Commands and Redirections in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_Users_And_Groups.html">Users and Groups in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_File_Permissions.html">File Permissions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_Sudo.html">Sudo Command in Linux</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_Git/01_Introduction.html">Git</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/02_Versioning_in_Git.html">Versioning in Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/03_Git_Branches.html">Git Branching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/04_Git_Rollback.html">Rolling Back to Previous Changes and Commits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/05_Git_SSH_Login_and_Rebase.html">Git SSH Login and Rebase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/06_Semantic_Versioning.html">Semantic Versioning in Git</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_VM_Configuration_Using_Vagrant.html">Server Configuration Using Vagrant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Variables_Json_and_YAML.html">Variables, Json and YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_Networking.html">Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_Introduction_to_Containerization.html">Introduction to Containerization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_BashScripting/01_Introduction_to_BashScripting.html">Introduction to Bash Scripting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10_BashScripting/02_Variables.html">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_BashScripting/03_Decision_Making_and_Loops.html">Decision Making and Loops</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11_AWS/01_Introduction_to_CloudComputing_and_AWS.html">Introduction to Cloud Computing and AWS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11_AWS/02_AWS_Global_Infrastructure.html">AWS Global Infrastructure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Projects/01_Introduction.html">Projects</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Projects/02_Vprofile_Project.html">Vprofile Project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F04_Linux/01_Introduction_to_Linux.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/04_Linux/01_Introduction_to_Linux.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Linux</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-linux">Introduction to Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-of-linux">History of Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-of-linux">Architecture of Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-principles-of-linux">Core Principles of Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-linux">Advantages of Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#different-distributions-of-linux">Different Distributions of Linux</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="linux">
+<h1>Linux<a class="headerlink" href="#linux" title="Link to this heading">#</a></h1>
+<section id="introduction-to-linux">
+<h2>Introduction to Linux<a class="headerlink" href="#introduction-to-linux" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Linux is an Open Source Unix based Operating System build on top of linux kernal and some GNU Utilities. This linux kernal is developed by a finnish student called Linus Tolvards in 1991. Linux operating system is packaged as Linux dstribution which contains Linux Kernal, System Software and some other supporting libraries which are offered by GNU Project. Several Linux distributions uses title called “Linux” but free software foundation uses it as “GNU/Unix”. Famous linux distributions in the market are RPM and Debian.</p></li>
+</ul>
+</section>
+<section id="history-of-linux">
+<h2>History of Linux<a class="headerlink" href="#history-of-linux" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>In earlier days, computers are enomorous and having different operating systems for different usecases making it difficult to run different applications and also making software incompatible. And these computers are expensive and inaccessible to public.</p></li>
+<li><p>To overcome this problem Bell labs developed Unix in 1969, a simpler and more efficient Operating System using C language not assenbly langauge. Unix has a recycable Kernal and its source code is Open.</p></li>
+<li><p>Initially Linux was adopted by many government bodies, financial institutions, universities etc and used it as mainframes and minicomputers.</p></li>
+<li><p>During 1980’s, many companies such as IBM and HP created their own Unix Distributions and starts selling them which leads to framentation. In 1983, Richard Stallman developed a GNU (GNU’s Not Unix) Project with a goal of to make Unix should be available for free. So to make Unix Freely available he created a GPL which is called as General Public License. The GPL ensures that software should be remained free to use, modify and distribute. By late 1980’s all the components of GNU project is ready but kernal is not ready yet.</p></li>
+<li><p>In 1991, a finnesh student called Linus Tolvards developed the Linux Kernal as Unix alternative for his personal Usecase.Initially named “Freax,” it became “Linux.” He used the GNU C compiler and initially restricted commercial use. In 1992, Torvalds released the Linux kernel under the GNU General Public License, integrating GNU tools and making it free and open-source.</p></li>
+<li><p>Today Linux is simply Linux Kernal + GNU Utilities. Linux is just Kernal which is the important component of System and System itself is basically GNU System with Linux added. So when you speaking about this entire operating system you need to say it as “GNU/Linux”. (GNU utilities are GNU C compilers, Bash Shell, and other software such as file system required for OS).</p></li>
+</ul>
+</section>
+<section id="architecture-of-linux">
+<h2>Architecture of Linux<a class="headerlink" href="#architecture-of-linux" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Linux is majorly consists of 4 layers. Those are :</p>
+<p><strong>Hardware Layer</strong> : This Layer consists of hardware components such as CPU, RAM, ROM, Mother Board etc.</p>
+<p><strong>Kernal</strong> : On top of hardware layer we have linux kernal. This linux kernal is intermediatary between user and hardware components. This kernal atually manages the system resources such as RAM, ROM, I/O devices etc.</p>
+<p><strong>Shell</strong> : This is the command line interface for user to interact with OS.</p>
+<p><strong>Applications</strong> : On top of this layer many applications are installed.</p>
+</li>
+<li><p>Linux distributions we have today are combination of linux kernal + GNU Utilities + Some Customized applications created by some organizations for specific usecases.</p></li>
+</ul>
+</section>
+<section id="core-principles-of-linux">
+<h2>Core Principles of Linux<a class="headerlink" href="#core-principles-of-linux" title="Link to this heading">#</a></h2>
+<ul>
+<li><p><strong>Everything is a File</strong></p>
+<ol class="arabic simple">
+<li><p>In Linux, almost everything (devices, directories, processes, etc.) is treated as a file.</p></li>
+<li><p>This unifying abstraction simplifies interactions with hardware and software components.</p></li>
+</ol>
+<p><strong>Ex</strong> :</p>
+<ol class="arabic simple" start="3">
+<li><p><code class="docutils literal notranslate"><span class="pre">/dev</span></code> contains device files for hardware like disks and terminals.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/proc</span></code> provides process and system information as files.</p></li>
+</ol>
+</li>
+<li><p><strong>Small, Simple and Modular Programs</strong></p>
+<ol class="arabic simple">
+<li><p>Linux utilities and commands are designed to do one task and do it well.</p></li>
+<li><p>Programs are kept small and focused, promoting modularity and composability.</p></li>
+</ol>
+<p><strong>Ex</strong> : Instead of a monolithic tool, Linux offers separate utilities like grep, awk, sed, and cat for text processing. Monolithic simply implies only single code base used for all the tasks. Non- Monolothic means seperate files are there for respective tasks which is actually linux.</p>
+</li>
+<li><p><strong>Text is the Universal Interface</strong></p>
+<ol class="arabic simple">
+<li><p>Text-based communication is preferred for input, output, and configuration.</p></li>
+<li><p>Files, logs, and settings are typically stored as plain text, making them easy to read, edit, and process.</p></li>
+</ol>
+<p><strong>Ex</strong> : Configuration files like /etc/passwd are simple text files.</p>
+</li>
+<li><p><strong>Open Source Collaboration</strong></p>
+<ol class="arabic simple">
+<li><p>Linux is developed under the principles of open-source software.</p></li>
+<li><p>The source code is freely available, encouraging transparency, collaboration, and community contributions.</p></li>
+<li><p>Ensures security through peer review and rapid bug fixing.</p></li>
+</ol>
+</li>
+<li><p><strong>Security and User Permissions</strong></p>
+<ol class="arabic simple">
+<li><p>Security is a core principle, with strict access control mechanisms.</p></li>
+<li><p>Files and resources are assigned ownership and permissions (read, write, execute) for three categories: owner, group, and others.</p></li>
+<li><p>Principle of least privilege ensures that users and processes have only the permissions they need.</p></li>
+</ol>
+</li>
+<li><p><strong>Interoperability and Composability</strong></p>
+<ol class="arabic simple">
+<li><p>Linux tools are designed to work together, allowing users to combine them to perform complex tasks.</p></li>
+<li><p>The output of one program can be used as the input for another via pipes (|).</p></li>
+</ol>
+<p><strong>Ex</strong> : cat file.txt | grep “search” | sort | uniq</p>
+</li>
+<li><p><strong>Flexibility and Customization</strong></p>
+<ol class="arabic simple">
+<li><p>Linux is highly customizable, from the kernel to the user interface.</p></li>
+<li><p>Users can build and modify their systems to suit specific needs, choosing components like window managers, shells, and tools.</p></li>
+</ol>
+</li>
+<li><p><strong>Portability</strong></p>
+<ol class="arabic simple">
+<li><p>Linux is designed to run on a wide range of hardware architectures, from embedded systems to supercomputers.</p></li>
+<li><p>Code written for Linux is highly portable across different platforms.</p></li>
+</ol>
+</li>
+<li><p><strong>Community Over Corporation</strong></p>
+<ol class="arabic simple">
+<li><p>Linux prioritizes the needs of its community of users and developers over corporate interests.</p></li>
+<li><p>Development is driven by collaboration and meritocracy</p></li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="advantages-of-linux">
+<h2>Advantages of Linux<a class="headerlink" href="#advantages-of-linux" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Open Source</p></li>
+<li><p>Community Support</p></li>
+<li><p>Heavily Customizable</p></li>
+<li><p>Most Servers runs on Linux</p></li>
+<li><p>Devops most tools implements on Linux only</p></li>
+<li><p>Automation</p></li>
+<li><p>Secure</p></li>
+</ul>
+</section>
+<section id="different-distributions-of-linux">
+<h2>Different Distributions of Linux<a class="headerlink" href="#different-distributions-of-linux" title="Link to this heading">#</a></h2>
+<ul>
+<li><p><strong>Popular Desktop Linux OS</strong></p>
+<ol class="arabic simple">
+<li><p>Ubuntu Linux</p></li>
+<li><p>Linux Mint</p></li>
+<li><p>Arch Linux</p></li>
+<li><p>Fedora</p></li>
+<li><p>Debian</p></li>
+<li><p>OpenSue</p></li>
+</ol>
+</li>
+<li><p><strong>Popular Server Linux OS</strong></p>
+<ol class="arabic simple">
+<li><p>Red Hat Enterprise Linux</p></li>
+<li><p>Ubuntu Server</p></li>
+<li><p>Centos</p></li>
+<li><p>SUSE Enterprise Linux</p></li>
+</ol>
+</li>
+<li><p>In todays IT Industry, people are using only two popular linux distors those are RPM (Red Hat Package Manager) and debian. The basic difference between these two are :</p>
+<p><strong>RPM</strong> : RPM stands for Red Hat Package Manager and it use <code class="docutils literal notranslate"><span class="pre">.rpm</span></code> files for pacakage management. Its package management tools are <code class="docutils literal notranslate"><span class="pre">dnf</span></code>, <code class="docutils literal notranslate"><span class="pre">yum</span></code>, and <code class="docutils literal notranslate"><span class="pre">rpm</span></code>. It is basically derived from Red Hat Enterprise Linux. Some of the RPM distros are RHEL and CentOs, Fedora, OpenSUSE.</p>
+<p><strong>Debian</strong> : Debian uses <code class="docutils literal notranslate"><span class="pre">.dpg</span></code> packages for package management and its package management tools are <code class="docutils literal notranslate"><span class="pre">apt</span></code>, <code class="docutils literal notranslate"><span class="pre">apt-get</span></code> and <code class="docutils literal notranslate"><span class="pre">dpkg</span></code>. It is basically derived from debian. Some of the debian distros are Ubuntu Server, Debian, Linux Mint, Kali Linux etc.</p>
+</li>
+</ul>
+</section>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./04_Linux"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../03_Virtualization_and_VM_Setup.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Virtualization and VM Setup</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="02_Directory_Structure_and_Basic_Commands_of_Linux.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Directory Structure and Basic Commands of Linux</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction-to-linux">Introduction to Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#history-of-linux">History of Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture-of-linux">Architecture of Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#core-principles-of-linux">Core Principles of Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#advantages-of-linux">Advantages of Linux</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#different-distributions-of-linux">Different Distributions of Linux</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

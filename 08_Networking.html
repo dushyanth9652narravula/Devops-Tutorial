@@ -1,0 +1,711 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Networking &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '08_Networking';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction to Containerization" href="09_Introduction_to_Containerization.html" />
+    <link rel="prev" title="Variables, Json and YAML" href="07_Variables_Json_and_YAML.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="01_Introduction_to_Devops.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="01_Introduction_to_Devops.html">
+                    Introduction to DevOps
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="02_Tools_Setup_For_Devops.html">Tools Setup For Devops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Virtualization_and_VM_Setup.html">Virtualization and VM Setup</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="04_Linux/01_Introduction_to_Linux.html">Linux</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/02_Directory_Structure_and_Basic_Commands_of_Linux.html">Directory Structure and Basic Commands of Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/03_Vim_Editor.html">Vim Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/04_File_Types.html">File Types in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/05_Filters_And_Redirections.html">Filter Commands and Redirections in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/06_Users_And_Groups.html">Users and Groups in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/07_File_Permissions.html">File Permissions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/08_Sudo.html">Sudo Command in Linux</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_Git/01_Introduction.html">Git</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05_Git/02_Versioning_in_Git.html">Versioning in Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Git/03_Git_Branches.html">Git Branching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Git/04_Git_Rollback.html">Rolling Back to Previous Changes and Commits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Git/05_Git_SSH_Login_and_Rebase.html">Git SSH Login and Rebase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Git/06_Semantic_Versioning.html">Semantic Versioning in Git</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="06_VM_Configuration_Using_Vagrant.html">Server Configuration Using Vagrant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Variables_Json_and_YAML.html">Variables, Json and YAML</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_Introduction_to_Containerization.html">Introduction to Containerization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_BashScripting/01_Introduction_to_BashScripting.html">Introduction to Bash Scripting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="10_BashScripting/02_Variables.html">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_BashScripting/03_Decision_Making_and_Loops.html">Decision Making and Loops</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="11_AWS/01_Introduction_to_CloudComputing_and_AWS.html">Introduction to Cloud Computing and AWS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="11_AWS/02_AWS_Global_Infrastructure.html">AWS Global Infrastructure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Projects/01_Introduction.html">Projects</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Projects/02_Vprofile_Project.html">Vprofile Project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F08_Networking.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/08_Networking.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Networking</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osi-model">OSI Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-of-networks">Classification of Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#networking-devices">Networking Devices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ip-address">IP Address</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#protocols">Protocols</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ports">Ports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#networking-in-virtual-machines">Networking in Virtual Machines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#networking-commands">Networking Commands</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="networking">
+<h1>Networking<a class="headerlink" href="#networking" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>A Computer Networking is a practice of connecting mutiple computing devices (like computers, servers, switches, routers, phones etc) so they can communicate, share data and use shared resources like printers, files or internet access. As its core computer network enables devices to <code class="docutils literal notranslate"><span class="pre">Send</span> <span class="pre">and</span> <span class="pre">Recieve</span> <span class="pre">Data</span> <span class="pre">using</span> <span class="pre">wired</span> <span class="pre">(Ethernet)</span> <span class="pre">or</span> <span class="pre">wireless</span> <span class="pre">(Wi-Fi)</span> <span class="pre">communication.</span></code>, <code class="docutils literal notranslate"><span class="pre">Access</span> <span class="pre">remote</span> <span class="pre">resources</span> <span class="pre">such</span> <span class="pre">as</span> <span class="pre">files</span> <span class="pre">or</span> <span class="pre">applications</span> <span class="pre">hosted</span> <span class="pre">on</span> <span class="pre">other</span> <span class="pre">machines</span></code> and <code class="docutils literal notranslate"><span class="pre">connect</span> <span class="pre">to</span> <span class="pre">internet</span> <span class="pre">which</span> <span class="pre">is</span> <span class="pre">the</span> <span class="pre">largest</span> <span class="pre">public</span> <span class="pre">network</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">world</span></code>.</p></li>
+<li><p>We can simply say that a computer network is communication between two or more network interfaces. A network interface is a point of connection between computer and network. Generally it refers both hardware like (network card, Ethernet port or Wi-Fi adapter in our computer) and software configuration (like ip addresses, MAC Addresses, and protocols) that allows comminication over network. So we can say network interfaces is a door way to enter into computer network just like a door to enter into a room, a device needs a network interface to connect and talk to other devices.</p></li>
+<li><p>The components involved in a computer network are : Two or more computers or devices, Cables as link between the computers, A Network interfacing Card on each, Swiches, Routers etc.</p></li>
+<li><p>Generally there are different configured around the world which are LAN (Local Area Network), WAN (Wide Area Network), Internet (Public Network).</p></li>
+<li><p>So whenever you request a url in the browser, first browser resolves its DNS and finds the correct IP and requests the OS to connect to the IP. Then OS asks the network interface in the system which might be Ethernet cable or Wi-Fi Adapter to connect to that IP. Then network interface send request to router (via radio signal if it is Wi-Fi or through cables if it Ethernet) then router sends this request to ISP (Internet Service Provider) via mutiple networking devices. Then ISP sends this request to nearest sever of that IP and that server responds with requested data and data travels the same reverse path that request has been travelled initially.</p></li>
+</ul>
+</section>
+<section id="osi-model">
+<h2>OSI Model<a class="headerlink" href="#osi-model" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>People around the world uses computer network to comminicate with each other. For worldwide data comminication, systems must be developed in such as way that they are compatiable to commnicate with each other. There should be standard communication methods and devices. International Organization and Standardization (ISO) has developed this standard. This communication model is called as Open System Interconnection (OSI)</p></li>
+<li><p>The OSI (Open System Interconnection) model is a 7-layer framework that describes how data moves from one device to anothor across the network. Each layer has a specific job and communicates with the layers above and below it.</p></li>
+<li><p>The 7 layers in the OSI model are :</p>
+<p><strong>Application Layer (Layer 7)</strong> : This is the closet layer to end user. Its not about the actual application (like google chrome), but about protocols that allows software to communicate over the network. When you open a website, your browser uses HTTP/HTTPs, which is an Application Layer Protocol. If you are using email, protocols like SMTP, POP3, or IMAP operate here. The application layer provides services such as file transfers, remote login, email, and web browsing. We can this layer is an interface where your software applications interact with the network.</p>
+<p><strong>Presentation Layer (Layer 6)</strong> : This layer ensures the data sent from one system can be understood by another, despite differences in data formats, charecter encoding, or encryption. It tanslates data formats like JPEG, MP4, PDF, etc. It encrypts/decrypts your web data during HTTPS connections using protocols like SSL/TLS. It also compresses or decompresses data (e.g gzip websites). So if your browser is sending data securely, this layer handles encryption (so only intended recipient can read it) and ensures format is usable. We can this this layer as translater or interpreter between you and anothor party.</p>
+<p><strong>Session Layer (Layer 5)</strong> : The session layer is responsible for establishment, maintainance, and termination of communication sessions between two devices. It opens a session (like temporary phone call) between your computer and server. It can sychronize data (e.g checkpoints during large transers). When you are watching a youtube video or downloading a file, it makes sure the session remains intact. We can think this layer as the one that keeps track of conversations between devices - who is taking to whom and when conversation ends etc.</p>
+<p><strong>Transport Layer (Layer 4)</strong> : This layer is responsible for end-to-end communication and reliability. It breaks data into segments and numbers them so they can be reassembled. It ensures reliable delivery, meaning data arrives without errors, in the correct order and only once. The most common protocol is TCP (used for web browsing) and UDP (used for video streaming or gaming where speed &gt; reliability). Ports also live here e.g. port 80 for HTTP, port 443 for HTTPs. We can think this layer as delivery service which tracks each box (segments) and ensures everything arrives correctly and on time.</p>
+<p><strong>Network Layer (Layer 3)</strong> : The Network Layer decides how data routes from source to destination. It uses IP addresses to identify each device. It adds IP Headers to the data and routes data through various intermediate routers on the way to destination. Common protocols here : IP (Internet Protocol), such as IPv4 and IPv6. Routers operate at this layer. We can think of this layer as GPS and road system which figures out the best path to get your data from your laptop in new york to server in california.</p>
+<p><strong>Data Link Layer (Layer 2)</strong> : The data link layer takes data from network layer and converts it into frames for transmission on physical network. Each frame contians a MAC address, which is the hardware address for a device’s network card (e.g your wifi adapter). It uses ARP (Address Resolution Protocol) to find MAC Address for IPs on local network. It also handles error detection and flow control. Switches operate in this layer. This layer as local mail carrier  which is responsible for delivering mail from your house to nearest post office (your router) using street address (MAC address).</p>
+<p><strong>Physical Layer (Layer 1)</strong> : This is the lowest layer. It Involves the actual transmission of binary data (0s and 1s) over a physical medium. It could be electrical signals on a wire (Ethernet), radio waves (Wi-Fi), or light pulses (fiber optic). This layer deals with cables, connectors, voltages, frequencies, and transmission rates. Our device Wi-Fi adapter, Ethernet Cables, network interface card (NIC) operates here. We can think this layer as truck or fiber cable that actually carries boxes (data) physically.</p>
+</li>
+<li><p>Now lets see the main difference between IP addresses and MAC addresses. We understand the difference with an analogy. Suppose we are living in a community which has multiple flats numbering from 100 to 800. Generally people inside the community comminicate each other by using the flat numbers. They doesn’t need the community address. Suppose if a person living outside wants to come to this community to meet a friend then he first need to know the community address to reach the community then he needs to know th flat number of his friend to reach his friend flat. Here we can think community address is IP address and flat numbers are MAC (Media Access Control) address. When ever some one outside of this network wants to access your network, then that device first sends request to the public address of the router which is the gateway to your netwrok (community) then router communicate your device by using MAC address. So we can say devices within a network communicates using MAC address. If devices from different network wants to communicate then we must need to use IP address. For global communication we need IP addresses and for local communication we need MAC address.</p></li>
+<li><p><strong>Example of OSI Model</strong> : When you open the chrome, type <code class="docutils literal notranslate"><span class="pre">https://google.com</span></code> and hit enter then at application layer (7), chrome creates an HTTPS request to google server, then this request encrypted by TLS in presentation layer (6). Now a session is created between your computer and google’s server by session layer (5). Now the request is split into TCP segments and each segment is assigned with sequence number by Transport Layer (4). Now network layer (3) adds a header with your IP and google servers IP to each segment. Now data link layer (2) attaches the MAC address of the device to each frame, so the frame can travel to router. Now at physical layer (1), the signal is transmited over Wi-Fi to your router, from there out of the internet.</p></li>
+</ul>
+</section>
+<section id="classification-of-networks">
+<h2>Classification of Networks<a class="headerlink" href="#classification-of-networks" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p><strong>PAN</strong> : PAN stands for Personal Area Network. It is smallest in range usually owned by a single person. PAN is mostly wireless such as connecting your smartphone with bluetooth devices such as airpods, headset etc.</p></li>
+<li><p><strong>LAN</strong> : LAN stands for Local Area Network which is common in homes, schools, and offices. It has high speed and low latency. It can be wired through ethernet or wi-fi. All computers in the lab are connected to same router is an example of LAN.</p></li>
+<li><p><strong>CAN</strong> : CAN stands for Campus Area Network which is larger than LAN. It spans accross multiple bulidings in a single institution. It is often uses fiber optics for buliding the network. For example University network connecting labs, library, dorms etc.</p></li>
+<li><p><strong>MAN</strong> : MAN stands for Metropolitan Area Network which spans a city or town. It is usually maintained by ISPs or large organizations. It uses technologies such as Metro Ethernet, leased lines etc. Examples of MAN are city trafic control netwrok or cable TV System.</p></li>
+<li><p><strong>WAN</strong> : WAN stands for Wide Area Network which is largest in scale. It connects Multiple LANs and MANs. It is usually owned by multiple organizations or ISPs. For example internet comes under WAN.</p></li>
+</ul>
+</section>
+<section id="networking-devices">
+<h2>Networking Devices<a class="headerlink" href="#networking-devices" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>There are actually 4 main devices that are involved to build a network. Those are Hub, Switch, Router and Modem.</p>
+<p><strong>HUB</strong> : HUB is a networking device which is used to connect mutiple devices/computers using cables in a Local Area Network. It actually copies incoming bits to all other ports. Suppose in a LAN, 4 computers are connected using a HUB via cables, if comp1 sends a request to comp2, then the request sent by comp1 goes to all other devices/computers connected over the hub instead of going only to comp2. This causes netwrok congestion and collision. So Hub just copies all the incoming data/bits to all other remaining ports. The main purpose of HUB is to connect mutiple devices/computers for buliding a network.</p>
+<p><strong>Switch</strong> : A Switch is a networking device which has a similar functionality of HUB. It also connect mutiple devices to bulid a network but it is much smarter than HUB. Becuase it understands the Ethernet frames, learns MAC addresses and bulids a MAC address table (which has port number and MAC address of the device conneted on this port). When Comp1 sends a request to comp2 the switch first checks the destination MAC address on the frame and forwars the frame only to the port where Comp2 is connected.</p>
+<p><strong>Modem</strong> : A Modem is a networking device which converts the analog  signals to digital signals and viceversa. Generally computer understands only bits (0’s and 1’s). But the signals passed through fibers and radio waves (for wireless network) are analog signals. So we need a modulator which actually converts the analog signal to digital signal. We can actually connect single device with modem to connect over internet. In order to connect mutiple devices we need the Router.</p>
+<p><strong>Router</strong> :  Router is used to bulid a network which connects the devices in LAN to Outside networks ot internet. It is a gateway to exchange data between mutiple networks. Modem works similar to router but does an addition work of mdulating the signal from analog to digital or digital to analog. But we know a single device is connected to modem and we connect that ingle device through ethernet cable only. Modem doesn’t offer any wireless access points. Whereas router has mutiple ports through which 2 to 4 devices can be connected via ethernet cables or it also has wireless access points to connect mutiple devices through Wi-Fi. Generally router has in-built switch through which we connect to mutiple devices. But at max we can connect only 2 to 4 devices by using router in-bulit switch. If you wanna connect more than 4 devices then we need to by external switch to connect mutiple devices and this switch is connected to router and this router is connected to modem.</p>
+</li>
+<li><p>But now a days , ISPs are providing a single device which comes with router, modem and an internal switch which can cable of connecting 2 to 4 devices. But modren routers has wireless access points (Wi-Fi adapter), so we doesn’t external switch.</p></li>
+<li><p>So, we can say that, our computers/devices are connected to switch and that switch is connected to router and router is connected to modem. So when ever we request an IP, first our network interface searches wheather that IP is in our subnet or not (is in our LAN or not). If it is in the LAN then it checks the corresponding MAC address of that IP in the ARP table. If our system doesn’t have corresponding MAC address of that IP then it sends a ARP request to that device and device responds back with that MAC address and our network adapter sends this frame to switch. Then switch checks the port of the destination MAC address and sends the request via that port. This is how data packets transfer from one device to anothor device if devices are in same network.</p></li>
+<li><p>If IP is not in the local subnet then our network interface request ARP for default Gateway (Which is router). The router responds back with its IP, then data packet transfered to switch then switch finds the port to which router is connected by using routers MAC address and sends that data packet to router. Now router also checks whether this Ip is in Local Subnet or not. If not then it send it next hop by finding the MAC address of next Hop by using ARP. This is how data packets transfer over networks.</p></li>
+</ul>
+</section>
+<section id="ip-address">
+<h2>IP Address<a class="headerlink" href="#ip-address" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>IP address stnads for Internet Protocol. IP addresses are used to route the devices/computers over internet. We have two types of IP addresses. One is IPv4 and 2nd one is IPv6. But mostly people will use IPv4 addresses.</p></li>
+<li><p>IPv4 address contains 32 bits. The structure of IPv4 has 4 octants and each octant carries 8 bits. For example <code class="docutils literal notranslate"><span class="pre">192.168.12.10</span></code> is an IPv4 addresses and you can that number is divided into 4 octants by a decimal point. First octant is <code class="docutils literal notranslate"><span class="pre">192</span></code>, 2nd octant is <code class="docutils literal notranslate"><span class="pre">168</span></code>, 3rd octant is <code class="docutils literal notranslate"><span class="pre">12</span></code> and 4th octant is <code class="docutils literal notranslate"><span class="pre">10</span></code>. Since each octant has 8 bits, so the maximum value of each octant is 255. So IPv4 ranges from <code class="docutils literal notranslate"><span class="pre">0.0.0.0.0</span></code> to <code class="docutils literal notranslate"><span class="pre">255.255.255.255</span></code>.</p></li>
+<li><p>There are two types in IPv4. Those are Public and Private IPs. Public IPs are mainly used to route in internet. Because internet does recognize the private IPs. Whereas Private IPs are mainly used in local network design. So in order to enter into this local network we actually need to use a router which has NAT (Network Address Transulator) and that converts the private Ips into public Ips.</p></li>
+<li><p>There are actually 3 types in Private IP Ranges. First one is <code class="docutils literal notranslate"><span class="pre">Class</span> <span class="pre">A</span></code>. Class A addresses are ranges from <code class="docutils literal notranslate"><span class="pre">10.0.0.0</span></code> to <code class="docutils literal notranslate"><span class="pre">10.255.255.255</span></code>. Second one is <code class="docutils literal notranslate"><span class="pre">Class</span> <span class="pre">B</span></code>. Class B addresses ranges from <code class="docutils literal notranslate"><span class="pre">172.16.0.0</span></code> to <code class="docutils literal notranslate"><span class="pre">172.31.255.255</span></code>. Third one is <code class="docutils literal notranslate"><span class="pre">Class</span> <span class="pre">C</span></code>. <code class="docutils literal notranslate"><span class="pre">Class</span> <span class="pre">C</span></code> addresses ranges from <code class="docutils literal notranslate"><span class="pre">192.168.0.0</span></code> to <code class="docutils literal notranslate"><span class="pre">192.168.255.255</span></code>.</p></li>
+<li><p>IP addresses are hirerarchical. Because of this they are used it for routing. Suppose consider this IP <code class="docutils literal notranslate"><span class="pre">192.168.10.5</span></code>. Here the first part (<code class="docutils literal notranslate"><span class="pre">192.168.10</span></code>) represents the network and last part (<code class="docutils literal notranslate"><span class="pre">.5</span></code>) represents the host (i mean device in the network). So if you see the first part of IP address then we can which network it is after then we can decide to whom we need to reach in that network. Whereas MAC addresses are not hierarical. They are designed for uniqueness of the device. The MAC address actually looks like <code class="docutils literal notranslate"><span class="pre">00:1A:2B:3C:4D:5E</span></code>. The first 3 bytes (<code class="docutils literal notranslate"><span class="pre">00:1A:2B</span></code>) is to identify the manufacturer (organizationally unique identifier). The last 3 bytes are assigned by manufacturer. If you consider the an example of mailing a letter, the postal address (IP address) has country, city, zip code which we can consider IP and that helps us to route across the globe and the persons name (MAC address) just tells us the final delivery person to whom we need to hand it once we reached the delivery person.</p></li>
+</ul>
+</section>
+<section id="protocols">
+<h2>Protocols<a class="headerlink" href="#protocols" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>A Protocol is basically a set of rules that devices follow to communicate with each other over a network. We can think it as a language through which two computers can talk each other.</p></li>
+<li><p>There are actually different types of Protocols. But mainly we have two types. Those are <strong>Application Layer Protocols</strong> and <strong>Transport Layer Protocols</strong>.</p></li>
+<li><p><strong>Application Layer Protocols</strong> are used for different services such as <code class="docutils literal notranslate"><span class="pre">HTTP</span></code> (HyperText Transfer Protocol), <code class="docutils literal notranslate"><span class="pre">HTTPS</span></code> (HyperText Tansfer Protocol with encryption) are used for web browsing, <code class="docutils literal notranslate"><span class="pre">FTP</span></code> (File Transfer Protocol) is used for file tansfers, <code class="docutils literal notranslate"><span class="pre">SMTP</span></code> (Simple Mail Transfer Protocol) is used for sending mails, <code class="docutils literal notranslate"><span class="pre">DNS</span></code> (Domain Name System) is used to convert the names like <a class="reference external" href="http://google.com">google.com</a> into IP addresses.</p></li>
+<li><p><strong>Transport Layer Protocols</strong> are used for establishing the connection between the source and destination and transfers the data packets over the network. There are mainly two transport layer protocols. Those are <code class="docutils literal notranslate"><span class="pre">TCP</span></code> (Transmission Control Protocol) and <code class="docutils literal notranslate"><span class="pre">UDP</span></code> (User Datagram Protocol).</p>
+<p><strong>TCP</strong> : TCP is a polite and careful delivery service which means it won’t stop until your message gets delivered correctly and in right order. TCP is connection oriented which means a handshake happens before data tranfer (like “Hello can we talk ?”). It is relaible also which means if data is lost in the middle, it resent it. TCP make sure the data arrives in the sam order it was sent. TCP is know for its error checking. It detects all the errors and fix them while retransmitting. It is slower than UDP. TCP is mainly used for Web Browsing (HTTP, HTTPS), Email (SMTP, IMAP, POP3), File Transfers (FTP), Remote Login (SSH).</p>
+<p><strong>UDP</strong> : UDP is fast and casual delivery service which means it just sends the packets without checking whether they are arrived or not. UDP is connectionless which means No handshake, just fires off the packets. It is unreliable which means no gaurantee whether packets will arrive or not. IN UDP ordering doesn’t matter, packets might arrive in different order. It is faster because it skips reliability checks. UDP is mainly used for Streaming video and audio, Online Gaming, Voice Calls, DNS Lookups.</p>
+<p><strong>Note</strong> : TCP generally uses a three way handshake which means client first asks server that <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">want</span> <span class="pre">to</span> <span class="pre">talk</span> <span class="pre">with</span> <span class="pre">you</span></code> (Synchronize - SYN) then server responds back with a message <code class="docutils literal notranslate"><span class="pre">Sure,</span> <span class="pre">I</span> <span class="pre">will</span> <span class="pre">hear</span> <span class="pre">you.</span> <span class="pre">Lets</span> <span class="pre">Talk</span></code> (Synchronize and Acknowledgement - SYN &amp; ACK) and then client responds <code class="docutils literal notranslate"><span class="pre">Lets</span> <span class="pre">talk</span></code> (Acknowledement - ACK). In these process, we might get 2 errors. Those are <code class="docutils literal notranslate"><span class="pre">This</span> <span class="pre">site</span> <span class="pre">cannot</span> <span class="pre">be</span> <span class="pre">reached</span></code>, <code class="docutils literal notranslate"><span class="pre">connection</span> <span class="pre">refused</span></code>. When TCP tries to talk to the server at start in three way handshake, but server doesn’t reply , but TCP tries many times but server won’t reply back. Then we can see that <code class="docutils literal notranslate"><span class="pre">Site</span> <span class="pre">cannot</span> <span class="pre">be</span> <span class="pre">reached</span></code> error which means there is not server at that IP. Second one is when TCP tries to talk to server but server responds with TCP RST which is reset, then we can see an error <code class="docutils literal notranslate"><span class="pre">Connection</span> <span class="pre">Refused</span></code>. In this scenario, Server is there at that IP but the service we are requesting may not be running on that port or port is not open.</p>
+</li>
+<li><p>Usually people gets confused about session layer and transport layer that session layer is responsible for establishment of connection but here TCP is establishing the connection. Pactically connection is established in transport layer and session layer is responsible for mainintaing the converstion between them from start of the connection to its end.</p></li>
+</ul>
+</section>
+<section id="ports">
+<h2>Ports<a class="headerlink" href="#ports" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>A port is virtual point where network connections start and end. It is actually like a door number on a computer that lets the right service or application gets the data.</p></li>
+<li><p>For example your computer has an IP address. But it can run many services at once such as web server, an email server, a file server etc. Each service listens on specific port number. Generally we can say protocol defines how to talk, but port defines where to send the data.</p></li>
+<li><p>In a computer we have 3 different types of ports. Those are :</p>
+<p><strong>Well Known Ports</strong>  : Well Known Ports ranges from 0 to 1023 which are generally used for some standard services like HTTP (80), HTTPS (443), SSH (22). Many will be empty if you aren’t running any services.</p>
+<p><strong>Registered Ports</strong> : Registerd Ports ranges from 1024 to 49151 which are generally used for applications such as MySQL (3306), RDP (3389). Whenever you are installed the applications, these applications runs on registered ports itself.</p>
+<p><strong>Dynamic/Ephemeral Ports</strong> : It ranges from 49152 to 65535. It is used temporarily by OS when you connect with other systems</p>
+</li>
+<li><p>Generally, when a port is open only if some program/service is actively listening on it. A port is “closed” or empty if no application is using it.</p></li>
+<li><p>Standard Ports that we need to remember are :</p>
+<img src = "./_static/Ports.png" alt = "Standard Ports" width = 1000 height = 500>
+</li>
+</ul>
+</section>
+<section id="networking-in-virtual-machines">
+<h2>Networking in Virtual Machines<a class="headerlink" href="#networking-in-virtual-machines" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>In virtual machines, we mostly have 3 types of networks when we create them using the vagrant file. Suppose lets consider, we have created a two VMs (web01 - running apache2 web server,db01 - running mariadb server) by using the multivm vagrantfile. The networks we can establish by using vagrant are :</p>
+<p><strong>NAT Mode</strong> : NAT mode is a default network created by virtualbox when we have created the virtual machine which is used to connect to internet. In NAT mode VM gets a private IP like <code class="docutils literal notranslate"><span class="pre">10.0.2.15</span></code> and a default gateway like <code class="docutils literal notranslate"><span class="pre">10.0.2.2</span></code> which is virtualbox internal NAT Router. When the VM sends a request to internet, virtualbox acts as mini-router which translates the VM’s private IP to your hosts real IP and forwards the request. Replies comes back to your host and virtualbox routes them back to VM. So from internet perspective, its looks like traffic is coming from host machine not from the VM. Things we can perform in NAT mode are : Access the internet from the VM — browse websites, apt update, yum install, wget files, etc, Download updates &amp; packages inside the VM, VM-to-host communication via port forwarding (manual setup), Outbound connections to other networks.</p>
+<p><strong>Host Only</strong> :  In Host Only Mode, our VM gets a private IP address (like <code class="docutils literal notranslate"><span class="pre">192.168.56.22</span></code>) and the network is isolated to host and VM only. We cannot access the internet in host only mode. In Host only Mode, virtual box creates a  virtual network adapter on our host machine (like espn01), and each VM thats connected to this network gets an IP in same subnet as the virtual adapter. So if you create anothor VM with IP starts like this <code class="docutils literal notranslate"><span class="pre">192.168.56._</span></code> then this VM also comes in the same network and both VM also can communicate each other since they are in same subnet and host can reach all VM eventhough they are not in same subnet.</p>
+<p><strong>Bridged Adapter</strong> : In bridged mode, VM acts like its own device on the LAN. In this mode, virtualbox actually creates a virtual network interface card (NIC) in our VM and bridges it with our host’s physical NIC. Our router (or switch) gives our VM its own IP address and sees its MAC address directly, just like it would given for our phone or anothor laptop. Our PC’s operating system is not involved in routing the traffic for our VM (the virtualbox bridge driver handles the link between physical NIC and VM NIC). So in bridged mode, VM is a full-fledged member of the LAN. directly reachable, no middleman needed.</p>
+</li>
+</ul>
+</section>
+<section id="networking-commands">
+<h2>Networking Commands<a class="headerlink" href="#networking-commands" title="Link to this heading">#</a></h2>
+<ul>
+<li><p><strong>ifconfig</strong> : It actually shows or configures the network interfaces. It shows IP addresses, subnet masks, MAC and interface status.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">ifconfig</span></code></p>
+</li>
+<li><p><strong>ip addr show</strong> : Its a modren version of <code class="docutils literal notranslate"><span class="pre">ifconfig</span></code> which shows the detailed informtion of network interfaces and IP addresses.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">ip</span> <span class="pre">addr</span> <span class="pre">show</span></code></p>
+</li>
+<li><p><strong>ping</strong> : It is actually used to test connectivity or reachability of the host on the network and measure the round trip time. We can check latency in between the hops by using <code class="docutils literal notranslate"><span class="pre">ping</span></code> command. We can use <code class="docutils literal notranslate"><span class="pre">ping</span></code> to check whether two Vms are connected or not. <code class="docutils literal notranslate"><span class="pre">ping</span></code> actually sends ICMP echo requests and reports responses.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">ping</span> <span class="pre">&lt;url&gt;</span></code></p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">ping</span> <span class="pre">www.google.com</span></code></p>
+</li>
+<li><p><strong>nmap</strong> : <code class="docutils literal notranslate"><span class="pre">nmap</span></code> is is used to scan the networks to discover hsots,open ports and services running on the ports. It actually scans the target machine network and display all open ports, services running on the ports etc.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">nmap</span> <span class="pre">&lt;target_ip</span> <span class="pre">or</span> <span class="pre">hostname&gt;</span></code></p>
+</li>
+<li><p><strong>tracert or traceroute</strong> : It actually used to route the path of data packets to reach the destination by listing all intermediate hops. For windows we use <code class="docutils literal notranslate"><span class="pre">tracert</span></code> and for linux/macos we use <code class="docutils literal notranslate"><span class="pre">traceroute</span></code></p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">tracert</span> <span class="pre">&lt;target_ip</span> <span class="pre">or</span> <span class="pre">hostname&gt;</span></code></p>
+</li>
+<li><p><strong>mtr</strong> : It actually combines both <code class="docutils literal notranslate"><span class="pre">ping</span></code> and <code class="docutils literal notranslate"><span class="pre">traceroute</span></code> functionality to continuously moniter the route and quality of network path. It provides the live statistics at each hop.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">mtr</span> <span class="pre">&lt;target_ip</span> <span class="pre">or</span> <span class="pre">hostname&gt;</span></code></p>
+</li>
+<li><p><strong>telnet</strong> : It is used to connect remote TCP servers for testing or terminal access. It is usefule for testing if port isopen and services respond.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">telnet</span> <span class="pre">&lt;target_ip</span> <span class="pre">or</span> <span class="pre">hostname&gt;</span> <span class="pre">port</span></code></p>
+</li>
+<li><p><strong>netstat -antp</strong> : It shows active TCP connections and listening ports with associated programs.</p>
+<p><strong>Syntax</strong> <code class="docutils literal notranslate"><span class="pre">netstat</span> <span class="pre">-antp</span></code></p>
+<p>Here <code class="docutils literal notranslate"><span class="pre">-a</span></code> means all sockets, <code class="docutils literal notranslate"><span class="pre">-n</span></code> means numeric addresses, <code class="docutils literal notranslate"><span class="pre">-t</span></code> means tcp connections, <code class="docutils literal notranslate"><span class="pre">-p</span></code> means program ids/program names.</p>
+</li>
+<li><p><strong>dig</strong> : It is used to check whether a particular host has respective IP in DNS lookup. It is DNS Lookup utility to query DNS servers for domain info.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">dig</span> <span class="pre">hostname</span></code></p>
+</li>
+<li><p><strong>nslookup</strong> : It is another DNS query tool for interactive or batch DNS lookups.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">nslookup</span> <span class="pre">hostname</span></code></p>
+</li>
+<li><p><strong>route &amp; route -n</strong> : It is to display or manipulate the IP routing table. <code class="docutils literal notranslate"><span class="pre">-n</span></code> shows numeric IP addresses instead of resloving hostnames.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">route</span></code> or <code class="docutils literal notranslate"><span class="pre">route</span> <span class="pre">-n</span></code></p>
+</li>
+<li><p><strong>arp</strong> : It is used to view and manipulate the Address Resolution Protocol (ARP) cache — maps IP addresses to MAC addresses on local network.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">arp</span> <span class="pre">-a</span></code></p>
+</li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07_Variables_Json_and_YAML.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Variables, Json and YAML</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="09_Introduction_to_Containerization.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Introduction to Containerization</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#osi-model">OSI Model</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classification-of-networks">Classification of Networks</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#networking-devices">Networking Devices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ip-address">IP Address</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#protocols">Protocols</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ports">Ports</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#networking-in-virtual-machines">Networking in Virtual Machines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#networking-commands">Networking Commands</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

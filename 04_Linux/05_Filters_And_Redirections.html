@@ -1,0 +1,649 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Filter Commands and Redirections in Linux &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '04_Linux/05_Filters_And_Redirections';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Users and Groups in Linux" href="06_Users_And_Groups.html" />
+    <link rel="prev" title="File Types in Linux" href="04_File_Types.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../01_Introduction_to_Devops.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../01_Introduction_to_Devops.html">
+                    Introduction to DevOps
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_Tools_Setup_For_Devops.html">Tools Setup For Devops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Virtualization_and_VM_Setup.html">Virtualization and VM Setup</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="01_Introduction_to_Linux.html">Linux</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="02_Directory_Structure_and_Basic_Commands_of_Linux.html">Directory Structure and Basic Commands of Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Vim_Editor.html">Vim Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_File_Types.html">File Types in Linux</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Filter Commands and Redirections in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_Users_And_Groups.html">Users and Groups in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_File_Permissions.html">File Permissions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="08_Sudo.html">Sudo Command in Linux</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_Git/01_Introduction.html">Git</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/02_Versioning_in_Git.html">Versioning in Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/03_Git_Branches.html">Git Branching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/04_Git_Rollback.html">Rolling Back to Previous Changes and Commits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/05_Git_SSH_Login_and_Rebase.html">Git SSH Login and Rebase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/06_Semantic_Versioning.html">Semantic Versioning in Git</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_VM_Configuration_Using_Vagrant.html">Server Configuration Using Vagrant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Variables_Json_and_YAML.html">Variables, Json and YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_Networking.html">Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_Introduction_to_Containerization.html">Introduction to Containerization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_BashScripting/01_Introduction_to_BashScripting.html">Introduction to Bash Scripting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10_BashScripting/02_Variables.html">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_BashScripting/03_Decision_Making_and_Loops.html">Decision Making and Loops</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11_AWS/01_Introduction_to_CloudComputing_and_AWS.html">Introduction to Cloud Computing and AWS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11_AWS/02_AWS_Global_Infrastructure.html">AWS Global Infrastructure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Projects/01_Introduction.html">Projects</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Projects/02_Vprofile_Project.html">Vprofile Project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F04_Linux/05_Filters_And_Redirections.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/04_Linux/05_Filters_And_Redirections.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Filter Commands and Redirections in Linux</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-commands">Filter Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-redirections">Output Redirections</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#piping">Piping</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="filter-commands-and-redirections-in-linux">
+<h1>Filter Commands and Redirections in Linux<a class="headerlink" href="#filter-commands-and-redirections-in-linux" title="Link to this heading">#</a></h1>
+<section id="filter-commands">
+<h2>Filter Commands<a class="headerlink" href="#filter-commands" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Filter commands are used to filter the files present in Linux File System. These commands are very useful when you want to find some settings in a directory but you don’t know in which file those settings are present in that directory. In these scenarios these filter commands will help us to find the files or return something from files (Such as first 10 lines or last 10 lines etc.)</p>
+<ol class="arabic">
+<li><p><strong>grep</strong> : <code class="docutils literal notranslate"><span class="pre">grep</span></code> command is used to search a word or given text present in the file. It actually returns the complete line in which given text is located in that file.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">&lt;text</span> <span class="pre">you</span> <span class="pre">want</span> <span class="pre">to</span> <span class="pre">search&gt;</span> <span class="pre">&lt;file</span> <span class="pre">or</span> <span class="pre">file_path&gt;</span></code></p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">firewall</span> <span class="pre">anaconds-kg.cfg</span></code> -&gt; firewall –disabled</p>
+<p>Generally grep is case sensitive which means it returns only if it finds the exact match. Suppose if that file contains this word <code class="docutils literal notranslate"><span class="pre">FIREWALL</span></code> then grep won’t return it eventhough it is <code class="docutils literal notranslate"><span class="pre">firewall</span></code>. So to make <code class="docutils literal notranslate"><span class="pre">grep</span></code> case-insensitive we actually need to use option <code class="docutils literal notranslate"><span class="pre">-i</span></code></p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-i</span> <span class="pre">firewall</span> <span class="pre">anaconda-kg.cfg</span></code> -&gt; It will returns all the lines that contains firewall.</p>
+<p>Suppose you want to search for a setting or a word but you doesn’t in which file it contains in a directory then actually need to use <code class="docutils literal notranslate"><span class="pre">*</span></code> which indicates all. Suppose you want to find a setting <code class="docutils literal notranslate"><span class="pre">SELINUX</span></code> in <code class="docutils literal notranslate"><span class="pre">/etc</span></code> but you doesn’t in which file to search then we can use the following syntax.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-r</span> <span class="pre">SELINUX</span> <span class="pre">/etc/*</span></code></p>
+<p>Here <code class="docutils literal notranslate"><span class="pre">-r</span></code> is used to search inside the directories which are present in <code class="docutils literal notranslate"><span class="pre">etc</span></code>.</p>
+<p>Suppose if you want to get the lines which doesn’t contain the specified word or text then you need to use the option <code class="docutils literal notranslate"><span class="pre">-v</span></code>.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">grep</span> <span class="pre">-v</span> <span class="pre">firewall</span> <span class="pre">anaconda-kg.cfg</span></code> -&gt; It returns all the lines which doesn’t contains firewall.</p>
+</li>
+<li><p><strong>less</strong> : <code class="docutils literal notranslate"><span class="pre">less</span></code> command is used to open the file in reader mode but we cannot edit the file as it is opened in read only mode. It opens the file in console itself and we can use up and down arrows to go to next and previous lines. Here we can perform all the operations like copy, search a word etc on the file except edit operations. These operations are same as we have performedin vim editor. To quit the file we just need to press <code class="docutils literal notranslate"><span class="pre">:q</span></code>.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">less</span> <span class="pre">&lt;filename</span> <span class="pre">or</span> <span class="pre">filepath&gt;</span></code></p>
+</li>
+<li><p><strong>more</strong> : <code class="docutils literal notranslate"><span class="pre">more</span></code> command opens the file percentage format which means it doesn’t open all the file. It would open 30% of file at start, later if you hit enter it starts opening remaining percentages. Once you moved to 100% and you want to go to user prompt then just hit down arrow.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">more</span> <span class="pre">&lt;filename</span> <span class="pre">or</span> <span class="pre">filepath&gt;</span></code></p>
+</li>
+<li><p><strong>head</strong> : <code class="docutils literal notranslate"><span class="pre">head</span></code> command is used to get first 10 lines in the file by default. If you want to get arbitary no of lines then provide the number of lines as an option.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">head</span> <span class="pre">-n</span> <span class="pre">&lt;filename</span> <span class="pre">or</span> <span class="pre">filepath&gt;</span></code> where n is number not symbol. If you want arbitary no of lines then provide the number there.</p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">head</span> <span class="pre">-20</span> <span class="pre">/etc/hostname</span></code> -&gt; It returns first 20 lines of the file hostname. If you won’t provide any number then it actually returns first 10 lines.</p>
+</li>
+<li><p><strong>tail</strong> “ <code class="docutils literal notranslate"><span class="pre">tail</span></code> command returns last 10 lines present in the file. If you want arbitary number of lines from last then provide the number as an option</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">tail</span> <span class="pre">-n</span> <span class="pre">&lt;filename</span> <span class="pre">or</span> <span class="pre">filepath&gt;</span></code></p>
+<p>There is a special option with <code class="docutils literal notranslate"><span class="pre">tail</span></code> command which is <code class="docutils literal notranslate"><span class="pre">-f</span></code> which displays last 10 lines in reader mode. But there is a speciality in this option which is if the file gets changed then those changes are reflected simultaneously if you use the tail with option <code class="docutils literal notranslate"><span class="pre">-f</span></code>.</p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">tail</span> <span class="pre">-f</span> <span class="pre">/var/log/messages</span></code></p>
+<p>Just run this in one window of git bash. Now open another window of git bash and run <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">ssh</span></code> then you can see changes in messages file.</p>
+</li>
+<li><p><strong>cut</strong> : <code class="docutils literal notranslate"><span class="pre">cut</span></code> command is used to retrieve the content from the file if your file looks like but seperated by different delimeters. When your file is well seperated by the delimeters and you want to retrieve the fields of the file then we can use <code class="docutils literal notranslate"><span class="pre">cut</span></code> command.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">cut</span> <span class="pre">-d&lt;delimeter</span> <span class="pre">by</span> <span class="pre">which</span> <span class="pre">the</span> <span class="pre">file</span> <span class="pre">is</span> <span class="pre">divided&gt;</span> <span class="pre">-f&lt;provide</span> <span class="pre">the</span> <span class="pre">field</span> <span class="pre">you</span> <span class="pre">want</span> <span class="pre">to</span> <span class="pre">retrieve&gt;</span> <span class="pre">&lt;filepath&gt;</span></code></p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">cut</span> <span class="pre">-d:</span> <span class="pre">-f2</span> <span class="pre">/etc/passwd</span></code> -&gt; Here file is sperated by : and iam retriveing the 2nd field.</p>
+</li>
+<li><p><strong>awk</strong> : <code class="docutils literal notranslate"><span class="pre">awk</span></code> is also similar to cut command bu we can provide regular expresssions also here.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">awk</span> <span class="pre">-F'&lt;provide</span> <span class="pre">delimeter</span> <span class="pre">by</span> <span class="pre">which</span> <span class="pre">file</span> <span class="pre">gets</span> <span class="pre">divided&gt;'</span> <span class="pre">'{print</span> <span class="pre">$&lt;field</span> <span class="pre">number&gt;}'</span> <span class="pre">&lt;filepath&gt;</span></code></p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">awk</span> <span class="pre">-F':'</span> <span class="pre">'{print</span> <span class="pre">$1}'</span> <span class="pre">/etc/passwd</span></code> -&gt; which gives the first field from the /etc/passwd file.</p>
+</li>
+<li><p><strong>sed</strong> : <code class="docutils literal notranslate"><span class="pre">sed</span></code> stands for stream editor, which is used to search a word in the file and replaces with a new word. But we can do this in <code class="docutils literal notranslate"><span class="pre">vim</span></code> editor also. Once you moved to extended command mode just use this syntax to replace a word with new word.
+<code class="docutils literal notranslate"><span class="pre">%s/&lt;word</span> <span class="pre">you</span> <span class="pre">actually</span> <span class="pre">wanna</span> <span class="pre">replace&gt;/&lt;new</span> <span class="pre">word&gt;</span></code>. This command actually replaces that word with new word only once in each line. If the word repeats multiple times in a single line then it doesn’t replace that repeated word. If you want replace a word globally then you need to use an option <code class="docutils literal notranslate"><span class="pre">g</span></code> in the syntax. So the new syntax now is <code class="docutils literal notranslate"><span class="pre">%s/&lt;word</span> <span class="pre">you</span> <span class="pre">actually</span> <span class="pre">wanna</span> <span class="pre">replace&gt;/&lt;new</span> <span class="pre">word&gt;/g</span></code>.</p>
+<p>But if you want to replace the same word in multiple files then we need to open each file seperately in vim editor and then run this command multiple times. So to overcome this we can use <code class="docutils literal notranslate"><span class="pre">sed</span></code> command which can able to replace the singlw word with new word in multiple files</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">'s/&lt;word</span> <span class="pre">you</span> <span class="pre">actually</span> <span class="pre">wanna</span> <span class="pre">replace&gt;/&lt;new</span> <span class="pre">word&gt;/g'</span> <span class="pre">&lt;filenames</span> <span class="pre">seperated</span> <span class="pre">by</span> <span class="pre">spaces&gt;</span></code></p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">'s/coronavirus/covid19/g'</span> <span class="pre">*</span></code> -&gt; It actually replaces coronavirus with covid19 in all the files present in cureent directory.</p>
+<p>But it actually replace the word with new word and prints it as output but it doesn’t edit actual file. To make changes in actual file itself, we need to use an option <code class="docutils literal notranslate"><span class="pre">-i</span></code>.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">sed</span> <span class="pre">-i</span> <span class="pre">'s/&lt;word</span> <span class="pre">you</span> <span class="pre">actualy</span> <span class="pre">wanna</span> <span class="pre">replace&gt;/&lt;new</span> <span class="pre">word&gt;/g</span> <span class="pre">&lt;filenames</span> <span class="pre">seperated</span> <span class="pre">by</span> <span class="pre">spaces&gt;</span></code></p>
+</li>
+<li><p><strong>find</strong> : <code class="docutils literal notranslate"><span class="pre">find</span></code> command is used to find the specific files or directory path. It is similar to find option in windows where we actually serach for.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">&lt;some</span> <span class="pre">file</span> <span class="pre">path</span> <span class="pre">where</span> <span class="pre">you</span> <span class="pre">wanna</span> <span class="pre">search&gt;</span> <span class="pre">-name</span> <span class="pre">&lt;filename&gt;</span></code></p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">find</span> <span class="pre">/etc</span> <span class="pre">-name</span> <span class="pre">host*</span></code> -&gt; It actually finds the file which starts with hostname in the <code class="docutils literal notranslate"><span class="pre">etc</span></code> directory.</p>
+<p>If you specified <code class="docutils literal notranslate"><span class="pre">/</span></code> then it actually searches for that file in entire system.</p>
+<p>We have some more options with find command. Those are :</p>
+<p><strong>-name</strong> : Searching file with its name.</p>
+<p><strong>-inum</strong> : Searching a file with particular inode number.</p>
+<p><strong>-type</strong> : Searching the file with particular type of the file.</p>
+<p><strong>-user</strong> : Searching the file by using the owner of the file.</p>
+<p><strong>-group</strong> : Searching for the files belonging to partiular group.</p>
+</li>
+<li><p><strong>locate</strong> : <code class="docutils literal notranslate"><span class="pre">locate</span></code> command is used to search for a file in entire system. Before using the locate command you actually need to update the file database by using <code class="docutils literal notranslate"><span class="pre">updatedb</span></code> command. If you won’t update the db then this command would result the file eventhough the file gets deleted but not gets updated in db. (as db won’t update automatically).</p>
+<p><strong>Syntax</strong> : First run <code class="docutils literal notranslate"><span class="pre">updatedb</span></code> and then <code class="docutils literal notranslate"><span class="pre">locate</span> <span class="pre">&lt;filename</span> <span class="pre">or</span> <span class="pre">filepath&gt;</span></code></p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">locate</span> <span class="pre">host</span></code>  -&gt; it will search for file name that contain word <code class="docutils literal notranslate"><span class="pre">host</span></code>. For this command we doesn’t need regular expression like <code class="docutils literal notranslate"><span class="pre">find</span></code> command.</p>
+</li>
+</ol>
+</li>
+</ul>
+</section>
+<section id="output-redirections">
+<h2>Output Redirections<a class="headerlink" href="#output-redirections" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Generally when you executed a command then output is displayed in the console which means the output gets redirected into the console. Suppose if you want to redirect the output to anothor file instead of console then we can use these redirections symbols which redirects the outputs into specified files.</p></li>
+<li><p>Redirection is simply cpoying the output of a command and pasting it in a file. We have two redirection symbols in linux. Those are <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">&lt;command&gt;</span> <span class="pre">&gt;</span> <span class="pre">&lt;filename&gt;</span></code></p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">uptime</span> <span class="pre">&gt;</span> <span class="pre">temp.txt</span></code></p>
+<p>Here it puts the output of <code class="docutils literal notranslate"><span class="pre">uptime</span></code> in temp.txt. If you want to place the output of another command in sample then this single greater than symbol (<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>) redirection symbol won’t do that. It actually overwrites the file and palce the output of new command instead of appending the output to the same file. To append the output in same file, then we need to use <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code> redirection symbol.</p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">free</span> <span class="pre">-m</span> <span class="pre">&gt;&gt;</span> <span class="pre">temp.txt</span></code></p>
+<p>In linux we have 3 different types of double greater than symbol redirections. Those are <code class="docutils literal notranslate"><span class="pre">1&gt;&gt;</span></code> , <code class="docutils literal notranslate"><span class="pre">2&gt;&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&amp;&gt;&gt;</span></code>. <code class="docutils literal notranslate"><span class="pre">1&gt;&gt;</span></code> is the default one which is equivalent to <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span></code>. It actually captures the output of the command and appends it into the specified file. But if any error occured while executing the command then it throws the error.</p>
+<p><strong>2&gt;&gt;</strong> : If you don’t want to print the error in the console and you want to redirect into the file then we can use this type of redirection. This redirection append errors occured while executing the command into the specified file. If no errors occured then it actually executes the command and prints the outputin the console.</p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">frreee</span> <span class="pre">-m</span> <span class="pre">2&gt;&gt;</span> <span class="pre">temp.txt</span></code></p>
+<p><strong>&amp;&gt;&gt;</strong> : This actually captures both outputs and errors and appends them into the specified file. It displays nothing to the console. If command executed successfully then it append the output to the specified file else it appends errors to the specified file.</p>
+<p>Sometimes we neithe rwant to store the output to console nor we want to print them in console. In such cases we actually need to redirect them to <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code> which stored nothing. Generally we use it when we are installing some packages.</p>
+<p><strong>Ex</strong> <code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">locate</span> <span class="pre">-y</span> <span class="pre">&gt;&gt;</span> <span class="pre">/dev/null</span></code> -&gt; This will redirects the output into <code class="docutils literal notranslate"><span class="pre">/dev/null</span></code> file but that files actually holds nothing. If any errors occurs then it will display in the console. Since we need to know if any error occured or not while installation. Because we need to install it properly.</p>
+</li>
+</ul>
+</section>
+<section id="piping">
+<h2>Piping<a class="headerlink" href="#piping" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>So far we have sending data from one file to another file. What if you want to send data from one program to anothor program. This is what piping does and the operator used to do this is <code class="docutils literal notranslate"><span class="pre">|</span></code> . The Pipe operator sends output from left program as input to the right program.</p>
+<p>Suppose consider a scenario where you  want to retrieve the lines which contain name <code class="docutils literal notranslate"><span class="pre">centos</span></code> in the last 20 lines of the <code class="docutils literal notranslate"><span class="pre">/var/log/messages</span></code> file. In this scenario you need to first find the last 20 lines in the <code class="docutils literal notranslate"><span class="pre">/var/log/messages</span></code> and then you need to pass this a input to find the what are the lines that contain vagrant. To do this i will write command like this.</p>
+<p><strong>Command</strong> : <code class="docutils literal notranslate"><span class="pre">tail</span> <span class="pre">-20</span> <span class="pre">/var/log/messages</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">-i</span> <span class="pre">centos</span></code></p>
+<p>For scenarios like this we actually use pipe operator.</p>
+</li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./04_Linux"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="04_File_Types.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">File Types in Linux</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="06_Users_And_Groups.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Users and Groups in Linux</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#filter-commands">Filter Commands</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output-redirections">Output Redirections</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#piping">Piping</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

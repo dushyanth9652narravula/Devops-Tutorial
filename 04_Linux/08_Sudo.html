@@ -1,0 +1,548 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Sudo Command in Linux &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '04_Linux/08_Sudo';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Git" href="../05_Git/01_Introduction.html" />
+    <link rel="prev" title="File Permissions" href="07_File_Permissions.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../01_Introduction_to_Devops.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../01_Introduction_to_Devops.html">
+                    Introduction to DevOps
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../02_Tools_Setup_For_Devops.html">Tools Setup For Devops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_Virtualization_and_VM_Setup.html">Virtualization and VM Setup</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="01_Introduction_to_Linux.html">Linux</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="02_Directory_Structure_and_Basic_Commands_of_Linux.html">Directory Structure and Basic Commands of Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_Vim_Editor.html">Vim Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_File_Types.html">File Types in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Filters_And_Redirections.html">Filter Commands and Redirections in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_Users_And_Groups.html">Users and Groups in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="07_File_Permissions.html">File Permissions</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Sudo Command in Linux</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../05_Git/01_Introduction.html">Git</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/02_Versioning_in_Git.html">Versioning in Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/03_Git_Branches.html">Git Branching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/04_Git_Rollback.html">Rolling Back to Previous Changes and Commits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/05_Git_SSH_Login_and_Rebase.html">Git SSH Login and Rebase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../05_Git/06_Semantic_Versioning.html">Semantic Versioning in Git</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../06_VM_Configuration_Using_Vagrant.html">Server Configuration Using Vagrant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../07_Variables_Json_and_YAML.html">Variables, Json and YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../08_Networking.html">Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../09_Introduction_to_Containerization.html">Introduction to Containerization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../10_BashScripting/01_Introduction_to_BashScripting.html">Introduction to Bash Scripting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../10_BashScripting/02_Variables.html">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../10_BashScripting/03_Decision_Making_and_Loops.html">Decision Making and Loops</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../11_AWS/01_Introduction_to_CloudComputing_and_AWS.html">Introduction to Cloud Computing and AWS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../11_AWS/02_AWS_Global_Infrastructure.html">AWS Global Infrastructure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../Projects/01_Introduction.html">Projects</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../Projects/02_Vprofile_Project.html">Vprofile Project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F04_Linux/08_Sudo.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/04_Linux/08_Sudo.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Sudo Command in Linux</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="sudo-command-in-linux">
+<h1>Sudo Command in Linux<a class="headerlink" href="#sudo-command-in-linux" title="Link to this heading">#</a></h1>
+<ul>
+<li><p>The Sudo command in Linux and Unix - Like Operating System allows a user to execute commands with elevated privilages. Sudo stands for superuser do. When you prepend sudo to a command, you are requesting the system to execute that command as a superuser, provided you have the necessary permissions.</p></li>
+<li><p>Generally all users maynot able to run all the tasks in the Linux System. Some are restricted to the root user Only. But if a user want to perform that restricted tasks then that user needs to have some privilages. If that user have necessary privilages then that user can run all the tasks on behalf of root user by using <code class="docutils literal notranslate"><span class="pre">sudo</span></code> command.</p></li>
+<li><p>To give all the permissions to an User we need to include that User name in <code class="docutils literal notranslate"><span class="pre">sudoers</span></code> file located in <code class="docutils literal notranslate"><span class="pre">/etc</span></code> directory. But if you see the <code class="docutils literal notranslate"><span class="pre">sudoers</span></code> file doesn’t have write permission for any kind of user even root user also. So edit that file we need to use another command <code class="docutils literal notranslate"><span class="pre">visudo</span></code>.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">visudo</span></code> -&gt; It will open <code class="docutils literal notranslate"><span class="pre">sudoers</span></code> file in vim editor.</p>
+</li>
+<li><p>After opening <code class="docutils literal notranslate"><span class="pre">sudoers</span></code> file in vim editor then we need to add the following line below this line <code class="docutils literal notranslate"><span class="pre">Allow</span> <span class="pre">root</span> <span class="pre">to</span> <span class="pre">run</span> <span class="pre">any</span> <span class="pre">anywhere</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;username&gt;</span>&#160;&#160;&#160; <span class="pre">ALL=(ALL)</span>&#160;&#160;&#160; <span class="pre">ALL</span></code>.</p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">vagrant</span>&#160; <span class="pre">ALL=(ALL)</span> <span class="pre">ALL</span></code> -&gt; Align this line with root line listed in that file. After editing the file just save and exit.</p>
+<p>Now try to change the password of any other user using <code class="docutils literal notranslate"><span class="pre">sudo</span></code> command. Since only root user have previlage to change the password of any other user using <code class="docutils literal notranslate"><span class="pre">passwd</span></code> command. Since vagrant user have all the privilages to run any tasks, so vagrant can change password of root user using <code class="docutils literal notranslate"><span class="pre">sudo</span></code> command`.</p>
+<p><strong>Ex</strong> : <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">passwd</span> <span class="pre">ansible</span></code> -&gt; It will asks first the password of vagrant user then it will redirect to set the password of ansible user.</p>
+<p>If you donot want to enter your own password then edit the sudoers file like this.</p>
+<p><code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">ALL=(ALL)</span>&#160;&#160; <span class="pre">NOPASSWD:</span> <span class="pre">ALL</span></code></p>
+<p><strong>Note</strong> : If you edit the sudoers file like above then linux won’t asks passwd of the vagrant (or any user having sudo permissions) for <code class="docutils literal notranslate"><span class="pre">sudo</span></code> command only. If you are switching from vagrant to ansible user then linux asks for the password of ansible to switch from vagrant to ansible. Suppose if you want to change the password of any user (if you forgotten password of that user) then just switch to root user ans set the password of that user.</p>
+</li>
+<li><p>But editing the sudoers file is not an optimal way to give the privilages of the root user to the normal user. Because if you made any errors in that file then we cannot able to run sudo command. But if you made any errors in the sudo file then linux will prompt hat errors in the console and then you just hit <code class="docutils literal notranslate"><span class="pre">e</span></code> on the keyboard to edit the the <code class="docutils literal notranslate"><span class="pre">sudoers</span></code> file, so that we can remove errors in that file.</p></li>
+<li><p>Inorder to overcome this issuse just create a file in <code class="docutils literal notranslate"><span class="pre">/etc/sudoers.d</span></code> directory. Suppose lets create a file called ansible in <code class="docutils literal notranslate"><span class="pre">/etc/sudoers.d</span></code> to give root user privilages to <code class="docutils literal notranslate"><span class="pre">ansible</span></code> user. So just open the created file in <code class="docutils literal notranslate"><span class="pre">vim</span></code> editor. And write the content same as you written in the <code class="docutils literal notranslate"><span class="pre">sudoers</span></code> file. <code class="docutils literal notranslate"><span class="pre">ansible</span> <span class="pre">ALL=(ALL)</span> <span class="pre">NOPASSWD:</span> <span class="pre">ALL</span></code>. This will automatically give the all root privilages to the ansible user. (Here you can name the file as you wish. But keep the file name as username might give more readability.) Similarly you can assign root privilages to the group also. Here iam assigning the root privilages to group <code class="docutils literal notranslate"><span class="pre">devops</span></code>.</p></li>
+<li><p>Now lets create a <code class="docutils literal notranslate"><span class="pre">devops</span></code> file in <code class="docutils literal notranslate"><span class="pre">/etc/sudoers.d</span></code> directory. Then we need to write the following thing in the created file.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">%&lt;group-name&gt;</span>&#160;&#160; <span class="pre">ALL=(ALL)</span>&#160;&#160; <span class="pre">NOPASSWD:</span> <span class="pre">ALL</span></code></p>
+<p><strong>EX</strong> : <code class="docutils literal notranslate"><span class="pre">%devops</span> <span class="pre">ALL=(ALL)</span>&#160; <span class="pre">NOPASSWD:</span> <span class="pre">ALL</span></code></p>
+</li>
+<li><p>This is how we can give the root privilages to normal users or groups.</p></li>
+</ul>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./04_Linux"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="07_File_Permissions.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">File Permissions</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../05_Git/01_Introduction.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Git</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

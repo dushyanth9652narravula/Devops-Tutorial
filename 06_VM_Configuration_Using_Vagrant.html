@@ -1,0 +1,761 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Server Configuration Using Vagrant &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = '06_VM_Configuration_Using_Vagrant';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Variables, Json and YAML" href="07_Variables_Json_and_YAML.html" />
+    <link rel="prev" title="Semantic Versioning in Git" href="05_Git/06_Semantic_Versioning.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="01_Introduction_to_Devops.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My sample book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My sample book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="01_Introduction_to_Devops.html">
+                    Introduction to DevOps
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="02_Tools_Setup_For_Devops.html">Tools Setup For Devops</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_Virtualization_and_VM_Setup.html">Virtualization and VM Setup</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="04_Linux/01_Introduction_to_Linux.html">Linux</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/02_Directory_Structure_and_Basic_Commands_of_Linux.html">Directory Structure and Basic Commands of Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/03_Vim_Editor.html">Vim Editor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/04_File_Types.html">File Types in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/05_Filters_And_Redirections.html">Filter Commands and Redirections in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/06_Users_And_Groups.html">Users and Groups in Linux</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/07_File_Permissions.html">File Permissions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_Linux/08_Sudo.html">Sudo Command in Linux</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="05_Git/01_Introduction.html">Git</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="05_Git/02_Versioning_in_Git.html">Versioning in Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Git/03_Git_Branches.html">Git Branching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Git/04_Git_Rollback.html">Rolling Back to Previous Changes and Commits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Git/05_Git_SSH_Login_and_Rebase.html">Git SSH Login and Rebase</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_Git/06_Semantic_Versioning.html">Semantic Versioning in Git</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Server Configuration Using Vagrant</a></li>
+<li class="toctree-l1"><a class="reference internal" href="07_Variables_Json_and_YAML.html">Variables, Json and YAML</a></li>
+<li class="toctree-l1"><a class="reference internal" href="08_Networking.html">Networking</a></li>
+<li class="toctree-l1"><a class="reference internal" href="09_Introduction_to_Containerization.html">Introduction to Containerization</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="10_BashScripting/01_Introduction_to_BashScripting.html">Introduction to Bash Scripting</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="10_BashScripting/02_Variables.html">Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="10_BashScripting/03_Decision_Making_and_Loops.html">Decision Making and Loops</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="11_AWS/01_Introduction_to_CloudComputing_and_AWS.html">Introduction to Cloud Computing and AWS</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="11_AWS/02_AWS_Global_Infrastructure.html">AWS Global Infrastructure</a></li>
+</ul>
+</details></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="Projects/01_Introduction.html">Projects</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="Projects/02_Vprofile_Project.html">Vprofile Project</a></li>
+</ul>
+</details></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2F06_VM_Configuration_Using_Vagrant.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/06_VM_Configuration_Using_Vagrant.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Server Configuration Using Vagrant</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-the-ip-ram-cpus-of-virtual-machine">Configuring the IP, RAM, CPUs of Virtual Machine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-vagrant-sync-directories">Configuring Vagrant Sync Directories</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#provisioning-in-vagrant">Provisioning in Vagrant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hosting-a-website-on-virtual-machine-manually">Hosting a Website on Virtual Machine Manually</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wordpress-setup-in-ubuntu">WordPress Setup in Ubuntu</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automating-website-setup-and-wordpress-setup-using-vagrant-provisioning">Automating Website Setup and Wordpress Setup Using Vagrant Provisioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivm-vagrantfile">MultiVM Vagrantfile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systemctl-configuration">Systemctl Configuration</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="server-configuration-using-vagrant">
+<h1>Server Configuration Using Vagrant<a class="headerlink" href="#server-configuration-using-vagrant" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>As we know vagrant is used to provision the virtual machines automatically by using simple commands such as <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">init</span> <span class="pre">&lt;boxname&gt;</span></code>, <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>, <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">destroy</span></code> etc. But all these virtual machines created by vagrant are configured by a single file called <code class="docutils literal notranslate"><span class="pre">Vagrantfile</span></code>.</p></li>
+<li><p>Inorder to configure the VM as we required, we need to understand the code inside the Vagrantfile. We can configure the resources required for VM to run such as RAM, ROM, CPUs , Networking etc.</p></li>
+<li><p>Vagrantfile is written in Ruby Language. We doesn’t need to learn Ruby Programming Language to understand the vagrant file. Vagrantfile starts with a simple syntax which is <code class="docutils literal notranslate"><span class="pre">Vagrant.configure('2')</span> <span class="pre">do</span> <span class="pre">|config|</span></code>. <code class="docutils literal notranslate"><span class="pre">Vagrant.configure('2')</span></code> represents that it is using the vagrant version 2 which is a stable version of vagrant. The <code class="docutils literal notranslate"><span class="pre">config</span></code> in between the pipe symbol is just an class object. Here we can name anything we want but we need to use the same object in all the code.</p></li>
+</ul>
+</section>
+<section id="configuring-the-ip-ram-cpus-of-virtual-machine">
+<h2>Configuring the IP, RAM, CPUs of Virtual Machine<a class="headerlink" href="#configuring-the-ip-ram-cpus-of-virtual-machine" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>After <code class="docutils literal notranslate"><span class="pre">Vagrant.Configure</span></code> the first thing we actually need to configure is what operating system we are using. If we are using linux what box we are using from vagrant cloud. To set up the Os or box we use <code class="docutils literal notranslate"><span class="pre">config.vm.box</span></code> syntax. For example if i want to use <code class="docutils literal notranslate"><span class="pre">ubuntu/focal64</span></code> then my syntax is <code class="docutils literal notranslate"><span class="pre">config.vm.box</span> <span class="pre">=</span> <span class="pre">ubuntu/focal64</span></code>.</p></li>
+<li><p>Generally we have two types of networking. One is Private IP address through which we can access the Virtual Machine by using host machine only. This Private IP address is used to test whether webserver in the virtual machine is running correctly or not. To set up the Private IP Address for the Virutal Machine we use <code class="docutils literal notranslate"><span class="pre">config.vm.network</span> <span class="pre">&quot;private_network&quot;,</span> <span class="pre">ip</span> <span class="pre">:</span> <span class="pre">&lt;ip_address&gt;</span></code>. But while setting up th IP Address don’t change 1st and 2nd octant, change only 3rd and 4th octant. In <code class="docutils literal notranslate"><span class="pre">192.168.33.10</span></code>, <code class="docutils literal notranslate"><span class="pre">33</span></code> and <code class="docutils literal notranslate"><span class="pre">10</span></code> are 3rd and 4th quadrants.</p></li>
+<li><p>Second Networking is <code class="docutils literal notranslate"><span class="pre">public</span> <span class="pre">network</span></code> we creates a bridged network, so that we can access the VM from our devices such as Phone etc but both VM and your phone connected on same LAN. Here Ip address is dynamic which is assigned by the Router (Here we get IP address similar to we get ip address when we deploy streamlit app locally etc). So to enable this public network we use <code class="docutils literal notranslate"><span class="pre">config.vm.network</span> <span class="pre">&quot;public_network&quot;</span></code>.</p></li>
+<li><p>To configure CPU, RAM then we actually need to configure the virtual machine provider. If we are using Windows OS, we actually use VirutalBox as VM provider. If we are using MAC, we use VMWare as VM provider. To configure VM Provider, we use <code class="docutils literal notranslate"><span class="pre">config.vm.provider</span> <span class="pre">&quot;&lt;VM</span> <span class="pre">Provider&gt;&quot;</span> <span class="pre">do</span> <span class="pre">|&lt;Any</span> <span class="pre">object</span> <span class="pre">name&gt;|</span></code>. For example <code class="docutils literal notranslate"><span class="pre">config.vm.provider</span> <span class="pre">&quot;virtualbox&quot;</span> <span class="pre">do</span> <span class="pre">|vb|</span></code>. Under this we can use <code class="docutils literal notranslate"><span class="pre">vb.memory</span></code> to configure the RAM and <code class="docutils literal notranslate"><span class="pre">vb.cpus</span></code> to configure cpus etc.</p></li>
+</ul>
+</section>
+<section id="configuring-vagrant-sync-directories">
+<h2>Configuring Vagrant Sync Directories<a class="headerlink" href="#configuring-vagrant-sync-directories" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Vagrant provides a nice feature called <code class="docutils literal notranslate"><span class="pre">Sync</span> <span class="pre">Directories</span></code> through which we can share the data between guest and host machine which means we can share data between personal computer and virtual machine. These <code class="docutils literal notranslate"><span class="pre">Sync</span> <span class="pre">Directories</span></code> are very useful when we want to edit some files present in virtual machine. Because virtual machines doesn’t have fancy editors to edit certian files. So we edit those files through our computers if they are in shared directories.</p></li>
+<li><p>To add a sync directory vagrant provides a syntax which is <code class="docutils literal notranslate"><span class="pre">config.vm.synced_folder</span> <span class="pre">&lt;host_path&gt;</span> <span class="pre">&lt;guest_path&gt;</span> <span class="pre">options</span></code>. You will see this syntax below the <code class="docutils literal notranslate"><span class="pre">config.vm.network</span> <span class="pre">&quot;public_network&quot;</span></code> syntax. Here <code class="docutils literal notranslate"><span class="pre">host_path</span></code> is path of a directory in our local computer, <code class="docutils literal notranslate"><span class="pre">guest_path</span></code> is path of a directory in virtual machine to sync with the directory in local machine. <code class="docutils literal notranslate"><span class="pre">options</span></code> are used to control the behaviour of these sync directories.</p></li>
+<li><p>By default, the folder containing the vagrantfile and <code class="docutils literal notranslate"><span class="pre">/vagrant</span></code> acts as sync directories in host and guest machine. If go below after above syntax (<code class="docutils literal notranslate"><span class="pre">config.vm.synced_folder</span> <span class="pre">&lt;host_path&gt;</span> <span class="pre">&lt;guest_path&gt;</span> <span class="pre">options</span></code>) we have anothot syntax which is used to disable the default sync directroy when virtual machine gets created. The syntax is <code class="docutils literal notranslate"><span class="pre">config.vm.synced_folder</span> <span class="pre">&quot;.&quot;</span> <span class="pre">&quot;/vagrant&quot;</span> <span class="pre">disabled</span> <span class="pre">:</span> <span class="pre">true</span></code>. If you uncomment this syntax then <code class="docutils literal notranslate"><span class="pre">/vagrant</span></code> and folder containing vagrantfile in our local machine doesn’t share data each other.</p></li>
+<li><p>So the basic syntax to create sync directories between host (local computer) and guest machine (Virtual machine) is following :</p>
+<p><strong>Syntax</strong> :<code class="docutils literal notranslate"><span class="pre">config.vm.synced_folder</span> <span class="pre">&quot;&lt;host_path&gt;&quot;</span> <span class="pre">&quot;&lt;guest_path&gt;&quot;</span> <span class="pre">options</span></code></p>
+<p><strong>Ex</strong> : `config.vm.synced_folder “../data” “/scripts”</p>
+<p>Here if <code class="docutils literal notranslate"><span class="pre">scripts</span></code> directory is not present in the virtual machine then vagrant automatically creates that scripts directory at the specified path.</p>
+</li>
+</ul>
+</section>
+<section id="provisioning-in-vagrant">
+<h2>Provisioning in Vagrant<a class="headerlink" href="#provisioning-in-vagrant" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Provisioning in Vagrant is nothing but process of setting up and configuring the virtual machine automatically after the VM is created. Provisioning can include tasks such as installing softwares, setting up the environment or configuring the services or applications in the Virtual Machine.</p></li>
+<li><p>This provisioning is actually useful when we want to set an environment for testing team. We usually setup the VM other configurations normally but we also need to install respective softwares and setting up them and so on. So if you include all the code in vagrant provisoners then they automatically creates that environment and set it up for us.</p></li>
+<li><p>Uses of provisioning are :</p>
+<ol class="arabic simple">
+<li><p>It automate the setup of environment</p></li>
+<li><p>It maintain the consistency across mutiple VMs</p></li>
+<li><p>By using provisioning we can recreate the test environment for depolyment.</p></li>
+</ol>
+</li>
+<li><p>There are different types of provisioning in vagrant. The most common provisioning technique is <code class="docutils literal notranslate"><span class="pre">Shell</span> <span class="pre">Provisioner</span></code>. If you go to the end of the Vagrantfile, we have one setting called <code class="docutils literal notranslate"><span class="pre">config.vm.provision</span></code> which is responsible for provsioning.</p>
+<p><strong>Shell Provisioning</strong> : Shell Provisioning is simply nothing but running whatever shell commands we have provided under this setting are automatically executed in virtual machine shell once the VM actually created not powerd on. There are actually two types of shell provisioning. Those are :</p>
+<p><strong>Inline</strong> : In inline shell provisioning we actually provide all the commands or shell scripts in vagrant file itself for provisioning.</p>
+<p><strong>Ex</strong> :</p>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">inline</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;&lt;-</span><span class="dl">SHELL</span>
+
+<span class="sh">    echo &quot;Running Shell Commands&quot;</span>
+
+<span class="sh">    sudo apt-get install -y httpd</span>
+
+<span class="dl">SHELL</span>
+</pre></div>
+</div>
+<p>This commands only gets executed at the time of VM creation only. If you power off the VM and Power on then these commands won’t gets executed. If you want to execute the provision commands even during power on then we have to use an additional option called <code class="docutils literal notranslate"><span class="pre">--provision</span></code> along with <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code> which means we have to execute <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span> <span class="pre">--provision</span></code> command. Otherwise we can execute <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">provision</span></code> command externally to provision the virtual machine even after the creation of VM.</p>
+<p><strong>External</strong> : In this type of shell provisioning, we use external script file which contains shell commands instead of writing the shell commands internally in the vagrant file. The syntax for this type of provisioning is :</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">config.vm.provision</span> <span class="pre">&quot;shell&quot;,</span> <span class="pre">path:</span> <span class="pre">&lt;Script_File_Path&gt;</span></code></p>
+</li>
+<li><p><strong>Note</strong> : Similarly we have other type of provisioning such as File Provisioning, Ansible Provisioning, Puppet Provisioning, Docker Provisionin. We need to provide respective names there instead of <code class="docutils literal notranslate"><span class="pre">&quot;shell&quot;</span></code> and provide respective commands instead of shell commands.</p></li>
+<li><p>The provsioning occurs automatically when you run <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>. But VM is not  provisioned everytime when you run <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>. The VM is only provisioned when VM is created for firstime. But you can manually trigger provisioning on an existing VM by running <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">provision</span></code>. If you want to re run provisioning while <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code> we can run <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code> command like this <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span> <span class="pre">--provision</span></code>. If you don’t want to provision you VM even when you are creating for the firsttime then  you create the Vm by running <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code> like this <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span> <span class="pre">--no-provision</span></code>.</p></li>
+</ul>
+</section>
+<section id="hosting-a-website-on-virtual-machine-manually">
+<h2>Hosting a Website on Virtual Machine Manually<a class="headerlink" href="#hosting-a-website-on-virtual-machine-manually" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Before hosting a website om virtual machine, first lets us know what is webserver and what is the importance of the web server.</p></li>
+<li><p><strong>Web Server</strong> :</p>
+<ol class="arabic simple">
+<li><p>A Web Server is a software that listens the HTTP/HTTPS requests from the client (like browser) and responds with appropriate content such as HTML pages, images or data etc.</p></li>
+<li><p>For example, when you enter <code class="docutils literal notranslate"><span class="pre">http://192.168.56.22</span></code> in your browser, your browser send the HTTP Request to the IP address. Then web server running on that IP listens for the request and responds with the requested resource if it is found else it throws an error if resource is not found.</p></li>
+<li><p>Without web server, the browsers Http request wouldn’t hit the VM as there is no program to interpret that request, so the browser would show error like connection refused or unable to connect.</p></li>
+<li><p>Some of the common web servers are <code class="docutils literal notranslate"><span class="pre">Apache</span></code>, <code class="docutils literal notranslate"><span class="pre">Nginx</span></code>, and other light-weight servers such as <code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">http.server</span> <span class="pre">80</span></code> etc.</p></li>
+</ol>
+</li>
+<li><p>To host a website on VM, first we need to install webserver which is httpd on Centos and apache on linux. So to install webserver <code class="docutils literal notranslate"><span class="pre">httpd</span></code> we need to use this command <code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">httpd</span></code></p></li>
+<li><p>Once we installed <code class="docutils literal notranslate"><span class="pre">httpd</span></code>, we need to start the service using <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">httpd</span></code> command. Once the service is started then we actually need to enable the service using <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">enable</span> <span class="pre">httpd</span></code>. Now we need to deploy the website content on the Virtual Machine. Generally Linux distros store all websites content in <code class="docutils literal notranslate"><span class="pre">/var/www/html</span></code> directory. Here we need to place the <code class="docutils literal notranslate"><span class="pre">index.html</span></code> and other related content of the website (But webserver generally opens that file only when we access the ip address). Once we placed all the content of the website in <code class="docutils literal notranslate"><span class="pre">/var/www/html</span></code>, just restart the service by runing <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">restart</span> <span class="pre">httpd</span></code> or <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">reload</span> <span class="pre">httpd</span></code>.</p></li>
+</ul>
+</section>
+<section id="wordpress-setup-in-ubuntu">
+<h2>WordPress Setup in Ubuntu<a class="headerlink" href="#wordpress-setup-in-ubuntu" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>To setup the Wordpress just follow the guidelines provided in the wordpress setup website in google. The only difference I have observed is for hosting a website we used <code class="docutils literal notranslate"><span class="pre">/var/www/html</span></code> directory. But for hosting a complete service, we have used a <code class="docutils literal notranslate"><span class="pre">/srv/www/</span></code> directory. Because <code class="docutils literal notranslate"><span class="pre">/srv/www</span></code> is convinient for hosting multiple services where as in <code class="docutils literal notranslate"><span class="pre">/var/www/html</span></code> is not convinient for hosting multiple websites or services.</p></li>
+</ul>
+</section>
+<section id="automating-website-setup-and-wordpress-setup-using-vagrant-provisioning">
+<h2>Automating Website Setup and Wordpress Setup Using Vagrant Provisioning<a class="headerlink" href="#automating-website-setup-and-wordpress-setup-using-vagrant-provisioning" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Till now, we have hosted a website and wordpress in the VM Manually. Now lets automate it by vagrant provisioning. We can simply automate the steps of website setup by just writing the commands that we have run for setting up website under vagrant provisioning part in vagrantfile of that VM.</p></li>
+<li><p>So the inline shell commands for website setup are :</p>
+<p><code class="docutils literal notranslate"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">httpd</span> <span class="pre">wget</span> <span class="pre">unzip</span> <span class="pre">-y</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">httpd</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">enable</span> <span class="pre">httpd</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">mkdir</span> <span class="pre">-p</span> <span class="pre">/tmp/finance</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/tmp/finance</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">https://www.tooplate.com/zip-templates/2135_mini_finance.zip</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">unzip</span> <span class="pre">-o</span> <span class="pre">2135_mini_finance.zip</span></code> -&gt; -o for overriding the files.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cp</span> <span class="pre">-r</span> <span class="pre">2135_mini_finanace/*</span> <span class="pre">/var/www/html</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">/tmp</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-r</span> <span class="pre">finance</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">reload</span> <span class="pre">httpd</span></code></p>
+</li>
+<li><p>Similar to automation of website setup, we can automate the Wordpress setup by just keeping all the commands in Vagrantfile under <code class="docutils literal notranslate"><span class="pre">config.vm.provision</span></code>.</p></li>
+</ul>
+</section>
+<section id="multivm-vagrantfile">
+<h2>MultiVM Vagrantfile<a class="headerlink" href="#multivm-vagrantfile" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Till now we have seen creating and provisioning single virtual machine using single Vagrantfile. But we can create mutiple vm by using single vagrant file. To do this we have to use a syntax called <code class="docutils literal notranslate"><span class="pre">config.vm.define</span> <span class="pre">&quot;vm_name&quot;</span> <span class="pre">do</span> <span class="pre">|&lt;class_object</span> <span class="pre">(Mostly</span> <span class="pre">same</span> <span class="pre">as</span> <span class="pre">VM</span> <span class="pre">Name)&gt;|</span></code>. By using this syntax, we can write the configuration of each vm seperately. For example we have settings of VM provider, VM Box, VM Network etc.</p>
+<p><strong>Ex</strong> :</p>
+<div class="highlight-ruby notranslate"><div class="highlight"><pre><span></span><span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">config</span><span class="o">|</span>
+
+<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">define</span><span class="w"> </span><span class="s2">&quot;web01&quot;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">web01</span><span class="o">|</span>
+
+<span class="w">      </span><span class="n">web01</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ubuntu/focal64&quot;</span>
+<span class="w">      </span><span class="n">web01</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;web01&quot;</span>
+<span class="w">      </span><span class="n">web01</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">&quot;private_network&quot;</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="ss">ip</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.56.22&quot;</span>
+
+<span class="w">  </span><span class="k">end</span>
+
+<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">define</span><span class="w"> </span><span class="s2">&quot;web02&quot;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">web02</span><span class="o">|</span>
+
+<span class="w">      </span><span class="n">web02</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;ubuntu/focal64&quot;</span>
+<span class="w">      </span><span class="n">web02</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;web02&quot;</span>
+<span class="w">      </span><span class="n">web02</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">&quot;private_network&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">ip</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.56.23&quot;</span>
+
+<span class="w">  </span><span class="k">end</span>
+
+<span class="w">  </span><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">define</span><span class="w"> </span><span class="s2">&quot;db01&quot;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="o">|</span><span class="n">db01</span><span class="o">|</span>
+
+<span class="w">      </span><span class="n">db01</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;eurolinux-vagrant/centos-stream-9&quot;</span>
+<span class="w">      </span><span class="n">db01</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">hostname</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;db01&quot;</span>
+<span class="w">      </span><span class="n">db01</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span><span class="w"> </span><span class="s2">&quot;private_network&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">ip</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;192.168.56.24&quot;</span>
+
+<span class="w">  </span><span class="k">end</span>
+
+<span class="k">end</span><span class="w"> </span><span class="sb">```</span>
+</pre></div>
+</div>
+</li>
+<li><p>If you see the above vagrantfile, we have created 3 VMs which are web01, web02, db01. If you run <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span></code>, then all the Vms gets created and up. If you want to create only one VM suppose <code class="docutils literal notranslate"><span class="pre">web01</span></code> then we just run <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">up</span> <span class="pre">web01</span></code>. If you want to login to <code class="docutils literal notranslate"><span class="pre">web01</span></code> then you have run <code class="docutils literal notranslate"><span class="pre">vagrant</span> <span class="pre">ssh</span> <span class="pre">web01</span></code>. So just need to mention the name of the virtual machine which hostname we have provided.</p></li>
+</ul>
+</section>
+<section id="systemctl-configuration">
+<h2>Systemctl Configuration<a class="headerlink" href="#systemctl-configuration" title="Link to this heading">#</a></h2>
+<ul>
+<li><p>Generally, when you install a service using <code class="docutils literal notranslate"><span class="pre">yum</span></code> or <code class="docutils literal notranslate"><span class="pre">dnf</span></code> or <code class="docutils literal notranslate"><span class="pre">apt-get</span></code> then package manager in that linux os creates a <code class="docutils literal notranslate"><span class="pre">.service</span></code> file in <code class="docutils literal notranslate"><span class="pre">/usr/lib/systemd/system</span></code>. If a service has <code class="docutils literal notranslate"><span class="pre">.service</span></code> file in that specified location then we can start, stop or enable those services by using <code class="docutils literal notranslate"><span class="pre">systemctl</span></code> command.</p></li>
+<li><p>But there are some services which cannot be installed by the package manager. In those case we have to manually download and run those services. One of such service is apache tomcat. <strong>Apache Tomcat</strong> is a service which is generally used to host java based websites. This service can be installed by the package managers in linux. We have to manually setup these service.</p></li>
+<li><p>To setup the tomcat service and enable systemctl command , we have to follow these steps.</p>
+<ol class="arabic">
+<li><p>First we need to download the core distribution file of the service either in zip or tar format. We can do this using <code class="docutils literal notranslate"><span class="pre">wget</span></code> command.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">wget</span> <span class="pre">https://dlcdn.apache.org/tomcat/tomcat-10/v10.1.43/bin/apache-tomcat-10.1.43.tar.gz</span></code></p>
+</li>
+<li><p>Next we need to extract the files from that tar or zip file.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">xzvf</span> <span class="pre">apache-tomcat-10.1.43.tar.gz</span></code></p>
+</li>
+<li><p>Generally when we install a service in linux, then package manager actually creates an user and group with same name so that these service files can be accessed by that service user only. So we have to create an user with same name as service but it doesn’t have shell login. Because the Service Users maynot require interactive shell.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">useradd</span> <span class="pre">--home-dir</span> <span class="pre">/opt/tomcat</span> <span class="pre">--shell</span> <span class="pre">/sbin/nologin</span> <span class="pre">tomcat</span></code></p>
+</li>
+<li><p>Now we need to change the ownership of all the files of the services to the service user (generally package manager doesn’t change the ownership of all the service files to service user from root. It only changes the ownership for required files. ) To change the ownership we use the <code class="docutils literal notranslate"><span class="pre">chown</span></code> command.</p>
+<p><strong>Syntax</strong> : <code class="docutils literal notranslate"><span class="pre">chown</span> <span class="pre">-R</span> <span class="pre">tomcat:tomcat</span> <span class="pre">/opt/tomcat/</span></code></p>
+</li>
+<li><p>Finally we need to create a <code class="docutils literal notranslate"><span class="pre">.service</span></code> file for this service under <code class="docutils literal notranslate"><span class="pre">/etc/systemd/system</span></code> directory. Here we are enabling systemctl for tomcat, so we create a <code class="docutils literal notranslate"><span class="pre">tomcat.service</span></code> file in <code class="docutils literal notranslate"><span class="pre">/etc/systemd/system</span></code>. In that file we need to give the following content</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[Unit]</span>
+<span class="na">Description</span><span class="o">=</span><span class="s">Tomcat</span>
+<span class="na">After</span><span class="o">=</span><span class="s">network.target</span>
+
+
+<span class="k">[Service]</span>
+<span class="na">Type</span><span class="o">=</span><span class="s">forking</span>
+
+<span class="na">User</span><span class="o">=</span><span class="s">tomcat</span>
+<span class="na">Group</span><span class="o">=</span><span class="s">tomcat</span>
+
+<span class="na">WorkingDirectory</span><span class="o">=</span><span class="s">/opt/tomcat</span>
+
+<span class="na">Environment</span><span class="o">=</span><span class="s">JAVA_HOME=/usr/lib/jvm/jre</span>
+
+<span class="na">Environment</span><span class="o">=</span><span class="s">CATALINA_HOME=/opt/tomcat</span>
+<span class="na">Environment</span><span class="o">=</span><span class="s">CATALINE_BASE=/opt/tomcat</span>
+
+<span class="na">ExecStart</span><span class="o">=</span><span class="s">/opt/tomcat/bin/startup.sh</span>
+<span class="na">ExecStop</span><span class="o">=</span><span class="s">/opt/tomcat/bin/shutdown.sh</span>
+
+<span class="k">[Install]</span>
+<span class="na">WantedBy</span><span class="o">=</span><span class="s">multi-user.target</span>
+</pre></div>
+</div>
+</li>
+<li><p>Once we have create the <code class="docutils literal notranslate"><span class="pre">.service</span></code> file then we need to run the <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">daemon-reload</span></code> to reload all the services in the system and then we start and enable the service by using <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">start</span> <span class="pre">&lt;service</span> <span class="pre">name&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">systemctl</span> <span class="pre">enable</span> <span class="pre">&lt;service</span> <span class="pre">name&gt;</span></code>.</p></li>
+</ol>
+</li>
+<li><p>So we need to follow all these steps to enable <code class="docutils literal notranslate"><span class="pre">systemctl</span></code> command for a service which we cannot install by packagemanager.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="05_Git/06_Semantic_Versioning.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Semantic Versioning in Git</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="07_Variables_Json_and_YAML.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Variables, Json and YAML</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-the-ip-ram-cpus-of-virtual-machine">Configuring the IP, RAM, CPUs of Virtual Machine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configuring-vagrant-sync-directories">Configuring Vagrant Sync Directories</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#provisioning-in-vagrant">Provisioning in Vagrant</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hosting-a-website-on-virtual-machine-manually">Hosting a Website on Virtual Machine Manually</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#wordpress-setup-in-ubuntu">WordPress Setup in Ubuntu</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automating-website-setup-and-wordpress-setup-using-vagrant-provisioning">Automating Website Setup and Wordpress Setup Using Vagrant Provisioning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#multivm-vagrantfile">MultiVM Vagrantfile</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#systemctl-configuration">Systemctl Configuration</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
